@@ -1,0 +1,56 @@
+.cards-radio-group {
+  margin-bottom: 12px;
+}
+.ant-radio-button-wrapper {
+  height: auto;
+  border-radius: 6px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9d9d9;
+}
+.ant-radio-button-wrapper::before {
+  display: none !important;
+}
+.cards-radio-card {
+  width: 80px;
+}
+.cards-radio-card-icon {
+  display: flex;
+  justify-content: space-around;
+  font-size: 28px;
+  padding-top: 10px;
+}
+.cards-radio-card-name {
+  text-align: center;
+}
+.cards-sec-radio-card {
+  width: 120px;
+  position: relative;
+}
+
+.cards-divider-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cards-card-type .ant-tabs-tab-btn {
+  width: 250px;
+  text-align: center;
+}
+.cards-radio-group-box {
+  padding: 0 15px;
+}
+.cards-thir-radio-card .cards-radio-card-value {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 5px;
+}
+.cards-thir-radio-card .cards-radio-card-name {
+  display: flex;
+  justify-content: center;
+}
+.cards-thir-radio-discount {
+  color: #E0282E;
+  margin-left: 10px;
+}

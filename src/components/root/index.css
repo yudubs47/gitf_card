@@ -1,0 +1,22 @@
+.main-header {
+  /* background-color: #fff; */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+.main-layout {
+  height: 100%;
+}
+.main-side-menu {
+  height: 100%;
+}
+.content-layout {
+  height: calc(100% - 48px);
+}
+.main-content {
+  height: calc(100% - 24px);
+  margin: 12px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  overflow-y: auto;
+}
