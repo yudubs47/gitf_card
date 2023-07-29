@@ -1,11 +1,16 @@
-import { useMemo, useCallback, useEffect } from 'react';
+import { useMemo, useCallback, useState, useRef } from 'react';
 import { Tabs, Segmented, Avatar, Radio, Form, Input, Checkbox, Button, Select, Divider, Typography, InputNumber  } from 'antd';
+import { Link } from "react-router-dom";
 import { VideoCameraOutlined } from '@ant-design/icons';
 import './index.css'
+const phoneNumberRules = [{ required: true, message: '请输入手机号' }, { pattern: /^1\d{10}$/g, message: '手机号码格式错误' }]
+const codeRules = [{ required: true, message: '请输入验证码' }]
 
 export default () => {
   const [form] = Form.useForm();
   const phoneNumber = Form.useWatch('phoneNumber', form);
+  const [count, setCount] = useState(-1)
+  const counter = useRef<any>(null)
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
@@ -13,23 +18,36 @@ export default () => {
     form.resetFields()
   }, [form])
 
-  const canSendValidate = useMemo(() => /^1\d{10}$/g.test(phoneNumber || ''), [phoneNumber])
+  const canSendValidate = useMemo(() => /^1\d{10}$/g.test(phoneNumber || '') && count === -1, [phoneNumber, count])
+
+  const startCount = () => {
+    setCount(10)
+    counter.current = setInterval(() => {
+      setCount(pre => {
+        const nextCount = pre - 1
+        if(nextCount < 0) {
+          clearInterval(counter.current )
+        }
+        return nextCount
+      })
+    }, 1000)
+  }
 
   return (
     <div className='forget-logout'>
       <div className='forget-box'>
         <Form form={form} name="validateOnly" layout="vertical" onFinish={onFinish}>
-          <Form.Item name="phoneNumber" label="" rules={[{ required: true }]}>
+          <Form.Item name="phoneNumber" label="" rules={phoneNumberRules}>
             <Input size='large' placeholder='手机号' />
           </Form.Item>
           <Form.Item
             name="code"
             label=""
-            rules={[{ required: true }, { len: 6 }]}
+            rules={codeRules}
           >
             <Input 
               size='large' placeholder='验证码'
-              addonAfter={<Button disabled={!canSendValidate} type='text'>发送验证码</Button>}
+              addonAfter={<Button onClick={startCount} disabled={!canSendValidate} type='text'>{count !== -1 ? `${count}秒后可重发` : '发送验证码'}</Button>}
             />
           </Form.Item>
           <Form.Item>
@@ -37,9 +55,13 @@ export default () => {
           </Form.Item>
         </Form>
         <div className='forget-switch'>
-          <Button type='link'>返回登录</Button>
+          <Link to="/login">
+            <Button type='link'>返回登录</Button>
+          </Link>
           <Divider type="vertical" />
-          <Button type='link'>立即注册</Button>
+          <Link to="/register">
+            <Button type='link'>立即注册</Button>
+          </Link>
         </div>
       </div>
     </div>

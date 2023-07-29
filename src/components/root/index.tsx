@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar  } from 'antd';
@@ -40,8 +40,8 @@ const menuConfig: MenuProps['items'] = [
   }
 ]
 
-
-const Index: React.FC = () => {
+const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
+  const { showSiderBar } = props
   const nav = useNavigate()
   const location = useLocation()
 
@@ -59,20 +59,26 @@ const Index: React.FC = () => {
   return (
     <Layout className='main-layout'>
       <Header className='main-header' style={headerStyle}>
-        <Avatar icon={<RadarChartOutlined />} />
-        <Avatar icon={<UserOutlined />}  />
+        <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>
+        {
+          showSiderBar ? <Avatar icon={<UserOutlined />}  /> : ''
+        }
       </Header>
       <Layout className='content-layout'>
-        <Sider theme='light' width={200} collapsible collapsedWidth={50}>
-          <Menu
-            selectedKeys={selectKeys}
-            mode="inline"
-            className='main-side-menu'
-            items={menuConfig}
-            onSelect={menuSelect}
-          />
-        </Sider>
-        <Content className='main-content' id="detail" >
+        {
+          showSiderBar ?
+            <Sider theme='light' width={200} collapsible collapsedWidth={50}>
+              <Menu
+                selectedKeys={selectKeys}
+                mode="inline"
+                className='main-side-menu'
+                items={menuConfig}
+                onSelect={menuSelect}
+              />
+            </Sider> :
+            ''
+        }
+        <Content className={showSiderBar ?  'main-content' : 'main-content-bo-padding'} id="detail" >
           <Outlet/>
         </Content>
       </Layout>

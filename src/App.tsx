@@ -11,12 +11,13 @@ import Cards from './pages/cards'
 import Orders from './pages/orders'
 import Profile from './pages/profile'
 import Forget from './pages/forget'
+import Register from './pages/register'
 
 const router = createHashRouter([
   {
     path: '/',
-    element: <Root />,
-    errorElement: <Cards/>,
+    element: <Root showSiderBar />,
+    errorElement: <Cards />,
     children: [
       { path: '/', element: <Cards /> },
       { path: '/cards', element: <Cards /> },
@@ -24,8 +25,17 @@ const router = createHashRouter([
       { path: '/profile', element: <Profile /> }
     ]
   },
-  { path: '/login', element: <Login /> },
-  { path: '/forget', element: <Forget /> },
+  {
+    path: '/',
+    element: <Root/>,
+    errorElement: <Cards />,
+    children: [
+      { path: '/login', element: <Login /> },
+      { path: '/forget', element: <Forget /> },
+      { path: '/register', element: <Register /> },
+    ]
+  },
+  
 ])
 
 function App() {
