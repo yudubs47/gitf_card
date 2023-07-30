@@ -18,7 +18,6 @@ const formItemLayout = {
  
 };
 
-
 const faceValueRules = [{ required: true, message: '请选择面值' }]
 const cardNumberRules = [{ required: true, message: '请输入卡号' }]
 const cardPasswordRules = [{ required: true, message: '请输入卡密' }]

@@ -1,8 +1,11 @@
-import { useMemo, useCallback, useState, useRef } from 'react';
+import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
 import { Form, Input, Checkbox, Button,   } from 'antd';
 import { Link } from "react-router-dom";
 import { VideoCameraOutlined } from '@ant-design/icons';
 import './index.css'
+
+import { getImageCode } from '../../service/common'
+
 const phoneNumberRules = [{ required: true, message: '请输入手机号' }, { pattern: /^1\d{10}$/g, message: '手机号码格式错误' }]
 const codeRules = [{ required: true, message: '请输入验证码' }]
 const passwordRules = [{ required: true, message: '请输入密码' }]
@@ -55,7 +58,7 @@ export default () => {
           rej('请输入密码')
         }
         if(value === password) {
-          res()
+          res(true)
         } else {
           rej('两次输入密码需一致')
         }
@@ -63,6 +66,10 @@ export default () => {
       // message: '两次输入密码需一致'
     }
   ]), [password])
+
+  useEffect(() => {
+    // getImageCode()
+  }, [])
 
   return (
     <div className='register-logout'>

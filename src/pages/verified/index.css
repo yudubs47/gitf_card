@@ -1,0 +1,22 @@
+.verified-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.verified-box {
+  text-align: center;
+}
+.verified-title {
+  font-size: 16px;
+  line-height: 32px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.verified-qrcode {
+  height: 150px;
+  width: 150px;
+}
+.verified-qrcode .qrcode {
+  height: 150px;
+  width: 150px;
+}

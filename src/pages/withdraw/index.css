@@ -1,0 +1,33 @@
+.withdraw-logout {
+  /* height: 100%; */
+}
+.withdraw-box .ant-radio-button-wrapper {
+  padding: 10px;
+}
+.withdraw-radio-card {
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+.withdraw-radio-card-bank-card {
+  width: 250px;
+  justify-content: space-between;
+}
+.withdraw-radio-card-icon {
+  display: flex;
+  font-size: 28px;
+  align-items: center;
+  margin: 0 10px;
+}
+/* .withdraw-radio-card-name {
+  
+} */
+.withdraw-box {
+  padding: 20px 0;
+}
+.withdraw-radio-card-tail {
+  display: flex;
+}
+.withdraw-radio-card-wehao {
+  padding-right: 5px;
+}

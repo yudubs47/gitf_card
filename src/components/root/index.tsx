@@ -37,6 +37,11 @@ const menuConfig: MenuProps['items'] = [
     key: 'forget',
     icon: <UserOutlined />,
     label: '忘记密码',
+  },
+  {
+    key: 'verified',
+    icon: <UserOutlined />,
+    label: '实名验证',
   }
 ]
 

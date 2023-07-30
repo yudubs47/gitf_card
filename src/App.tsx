@@ -12,6 +12,8 @@ import Orders from './pages/orders'
 import Profile from './pages/profile'
 import Forget from './pages/forget'
 import Register from './pages/register'
+import Verified from './pages/verified'
+import Withdraw from './pages/withdraw'
 
 const router = createHashRouter([
   {
@@ -22,7 +24,8 @@ const router = createHashRouter([
       { path: '/', element: <Cards /> },
       { path: '/cards', element: <Cards /> },
       { path: '/orders', element: <Orders /> },
-      { path: '/profile', element: <Profile /> }
+      { path: '/profile', element: <Profile /> },
+      { path: '/withdraw', element: <Withdraw /> },
     ]
   },
   {
@@ -33,6 +36,7 @@ const router = createHashRouter([
       { path: '/login', element: <Login /> },
       { path: '/forget', element: <Forget /> },
       { path: '/register', element: <Register /> },
+      { path: '/verified', element: <Verified /> }
     ]
   },
   
