@@ -1,0 +1,19 @@
+.pay-password-logout {
+  height: 100%;
+  min-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pay-password-box {
+  width: 450px;
+  padding: 30px 60px;
+}
+.pay-password-switch {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.submit-btn {
+  
+}

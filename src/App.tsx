@@ -14,6 +14,10 @@ import Forget from './pages/forget'
 import Register from './pages/register'
 import Verified from './pages/verified'
 import Withdraw from './pages/withdraw'
+import User from './pages/user'
+import Phone from './pages/phone'
+import BankCard from './pages/bankCard'
+import PayPassword from './pages/payPassword'
 
 const router = createHashRouter([
   {
@@ -26,6 +30,10 @@ const router = createHashRouter([
       { path: '/orders', element: <Orders /> },
       { path: '/profile', element: <Profile /> },
       { path: '/withdraw', element: <Withdraw /> },
+      { path: '/user', element: <User /> },
+      { path: '/phone', element: <Phone /> },
+      { path: '/bankCard', element: <BankCard /> },
+      { path: '/payPassword', element: <PayPassword /> },
     ]
   },
   {

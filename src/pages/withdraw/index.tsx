@@ -34,6 +34,7 @@ export default () => {
     <div className='withdraw-logout'>
       <div className='withdraw-box'>
         <Form
+          size='large'
           name="singleForm"
           autoComplete="off"
           form={form}
@@ -54,7 +55,7 @@ export default () => {
             </Radio.Group>
           </Form.Item>
           <Form.Item label="收款姓名" name="name" initialValue='收款人'>
-            <Input size='large' disabled />
+            <Input disabled />
           </Form.Item>
           {
             payType === 'bank' ?
@@ -69,11 +70,11 @@ export default () => {
                 </Radio.Group>
               </Form.Item> :
               <Form.Item label={payType === 'ali' ? '支付宝账号' : '微信账号'} name={payType === 'ali' ? 'aliAccount' : 'wechatAccount'} >
-                <Input size='large' disabled />
+                <Input disabled />
               </Form.Item> 
           }
           <Form.Item label="提现金额" name="amount" rules={amountRules} >
-            <InputNumber style={{ width: '100%' }} size='large' placeholder='请输入金额' min={1} max={50000} step={1} />
+            <InputNumber style={{ width: '100%' }} placeholder='请输入金额' min={1} max={50000} step={1} />
           </Form.Item>
           <Form.Item {...formItemLayout}>
             <Button size='large' block type="primary" htmlType="submit" >
@@ -92,7 +93,7 @@ const AddUncard = (props: { payType: PayType }) => {
   const [form] = Form.useForm();
   return (
     <Modal title='新增/编辑收款账号'>
-      <Form form={form} name="validateOnly" {...singleFormPorps}>
+      <Form size='large' form={form} name="validateOnly" {...singleFormPorps}>
         <Form.Item name="type" label="账号类型" initialValue={payType}>
           <Radio.Group >
             <Radio value={'ali'}>支付宝</Radio>
@@ -100,7 +101,7 @@ const AddUncard = (props: { payType: PayType }) => {
           </Radio.Group>
         </Form.Item>
         <Form.Item name="account" label="账号" >
-          <Input size='large' placeholder='请输入支付宝/微信账号' />
+          <Input placeholder='请输入支付宝/微信账号' />
         </Form.Item>
       </Form>
     </Modal>

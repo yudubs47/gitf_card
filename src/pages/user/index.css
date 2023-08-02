@@ -1,0 +1,43 @@
+.user-logout {
+}
+.user-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.user-info-avatar {
+  background-color: '#87d068'
+}
+.user-name {
+  font-size: 16px;
+  line-height: 24px;
+}
+.user-withdraw-btn {
+  width: 120px;
+  margin-bottom: 10px;
+}
+.user-balance-red {
+  color: red;
+}
+.user-account-info-row {
+  padding: 0 30px;
+}
+.user-mame {
+  line-height: 32px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.user-detail-card-line {
+  line-height: 32px;
+  font-size: 14px;
+  display: flex;
+}
+.add-uncard {
+  padding-top: 20px;
+}

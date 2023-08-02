@@ -24,7 +24,7 @@ const menuConfig: MenuProps['items'] = [
     label: '订单列表',
   },
   {
-    key: 'profile',
+    key: 'user',
     icon: <UserOutlined />,
     label: '用户中心',
   },
