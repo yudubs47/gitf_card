@@ -1,0 +1,6 @@
+.rich-text-only-layout {
+  padding: 20px;
+}
+.rich-text-only {
+  white-space: pre-wrap
+}

@@ -7,3 +7,9 @@ export const sendSmsPost = (params: ReqParams) => post({ url:'/api/v1/auth/sendS
 export const loginPassPost = (params: ReqParams) => post({ url:'/api/v1/auth/loginPass', ...params })
 export const loginVerifyCodePost = (params: ReqParams) => post({ url:'/api/v1/auth/loginVerifyCode', ...params })
 
+export const updatePasswordPost = (params: ReqParams) => post({ url:'/api/v1/auth/updatePassword', ...params })
+
+export const logoutPost = (params?: ReqParams) => post({ url:'/api/v1/auth/logout', ...(params || {}) })
+
+// 所有卡种
+export const getAllCard = () => get({ url:'/api/v1/platform/allCard' })

@@ -62,7 +62,7 @@ export default () => {
             rules={codeRules}
           >
             <Input 
-               placeholder='验证码'
+              placeholder='验证码'
               addonAfter={<Button size='middle' onClick={startCount} disabled={!canSendValidate} type='text'>{count !== -1 ? `${count}秒后可重发` : '发送验证码'}</Button>}
             />
           </Form.Item>

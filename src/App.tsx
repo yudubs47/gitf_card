@@ -18,6 +18,7 @@ import User from './pages/user'
 import Phone from './pages/phone'
 import BankCard from './pages/bankCard'
 import PayPassword from './pages/payPassword'
+import RichTextOnly from './pages/richTextOnly';
 
 const router = createHashRouter([
   {
@@ -34,6 +35,7 @@ const router = createHashRouter([
       { path: '/phone', element: <Phone /> },
       { path: '/bankCard', element: <BankCard /> },
       { path: '/payPassword', element: <PayPassword /> },
+      { path: '/richTextOnly/:type', element: <RichTextOnly /> },
     ]
   },
   {
