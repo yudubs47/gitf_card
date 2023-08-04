@@ -37,6 +37,11 @@ const menuConfig: MenuProps['items'] = [
     label: '登录',
   },
   {
+    key: 'register',
+    icon: <UserOutlined />,
+    label: '注册',
+  },
+  {
     key: 'forget',
     icon: <UserOutlined />,
     label: '忘记密码',
