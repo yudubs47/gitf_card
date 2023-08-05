@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
-import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined } from '@ant-design/icons';
+import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown  } from 'antd';
 import './index.css'
@@ -18,8 +18,13 @@ const { Header, Content, Footer, Sider } = Layout;
 const menuConfig: MenuProps['items'] = [
   {
     key: 'cards',
-    icon: <AccountBookOutlined />,
+    icon: <BookOutlined />,
     label: '回收卡类',
+  },
+  {
+    key: 'withdraw',
+    icon: <AccountBookOutlined />,
+    label: '提现',
   },
   {
     key: 'orders',
@@ -32,32 +37,17 @@ const menuConfig: MenuProps['items'] = [
     label: '用户中心',
   },
   {
-    key: 'login',
-    icon: <UserOutlined />,
-    label: '登录',
-  },
-  {
-    key: 'register',
-    icon: <UserOutlined />,
-    label: '注册',
-  },
-  {
-    key: 'forget',
-    icon: <UserOutlined />,
-    label: '忘记密码',
-  },
-  {
     key: 'verified',
     icon: <UserOutlined />,
     label: '实名验证',
   },
   {
     key: '__platformPost',
-    icon: <UserOutlined />,
+    icon: <BellOutlined />,
     label: '最新公告',
     children: [
       {
-        key: 'platformNotice',
+        key: 'platformPost',
         icon: <UserOutlined />,
         label: '平台公告',
       },
@@ -102,7 +92,7 @@ const menuConfig: MenuProps['items'] = [
         label: '商务合作',
       },
       {
-        key: 'richTextOnly/contact',
+        key: 'contact',
         icon: <UserOutlined />,
         label: '联系我们',
       },
@@ -117,7 +107,7 @@ const menuConfig: MenuProps['items'] = [
       //   label: 'api接口',
       // },
       {
-        key: 'platformAddTick',
+        key: 'feedback',
         icon: <UserOutlined />,
         label: '意见反馈',
       },
@@ -155,7 +145,15 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
         <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>
         {
           showSiderBar ?
-            <Dropdown menu={{ items: [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> }] }} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+            <Dropdown
+              menu={{
+                items: [
+                  { key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> },
+                ] 
+              }} 
+              placement="bottomRight"
+              arrow={{ pointAtCenter: true }
+            }>
               <Avatar onClick={() => nav('/user')} icon={<UserOutlined />}  /> 
             </Dropdown>
           : ''

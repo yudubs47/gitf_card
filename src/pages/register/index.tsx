@@ -32,7 +32,6 @@ export default () => {
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
-    console.log('register params', value)
     const reqParam = {
       phone: value.phoneNumber,
       password: value.password,
@@ -73,7 +72,6 @@ export default () => {
   const comfirmPasswordRules = useMemo(() => ([
     { 
       validator: (_, value: string) => new Promise((res, rej) => {
-        console.log('value', value, 'password', password)
         if(value === undefined || value === '') {
           rej('请输入密码')
         }

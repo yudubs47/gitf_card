@@ -1,9 +1,11 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
-import { Button, Modal, Form, Input, Radio, Select, Avatar, Statistic, Divider, Descriptions } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Button, Modal, Form, Input, Radio, Select, Avatar, Statistic, Divider, Descriptions, message } from 'antd';
+import { CloseOutlined, UserOutlined  } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import dayjs from 'dayjs'
 import './index.css'
-import { getWechat } from '../../service/payment'
+import { getAccountView } from '../../service/user'
+import { getWechat, updateWechat, getAlipay, updateAlipay } from '../../service/payment'
 
 const formItemLayout = {
   labelCol: { span: 5 },
@@ -27,24 +29,65 @@ const avatarStyle = { backgroundColor: '#87d068', marginRight: '20px' }
 export default () => {
   const [showUserDetailCard, setShowUserDetailCard] = useState(false)
   const [showAddUncard, setAddUncard] = useState<PayType | ''>('')
-  useEffect(() => {
+  const [accountInfo, setAccountInfo] = useState<any>({})
+  const [topNotice, setTopNotice] = useState<any>({})
+  const [wechatAccount, setWechatAccount] = useState('')
+  const [alipayAccount, setAlipayAccount] = useState('')
+  const { user } = accountInfo
+
+  const searchPaymentAccount = useCallback(() => {
     getWechat()
-      .then((resp) => {
-        console.log('getWechat', resp)
-      })
+      .then(resp => setWechatAccount(resp))
+    getAlipay()
+      .then(resp => setAlipayAccount(resp))
   }, [])
+
+  useEffect(() => {
+    getAccountView()
+      .then((resp) => {
+        setAccountInfo(resp)
+        setTopNotice(resp.topNotice)
+      })
+    searchPaymentAccount()
+  }, [])
+  
+
   return (
     <div className='user-logout'>
+      {
+        topNotice?.id ?
+          <>
+            <div className='user-post'>
+              <div className='user-post-left'>
+                <div className='user-post-title-box'>
+                  <div className='user-post-title-info'>最新公告</div>
+                  <div className='user-post-date'>{dayjs(topNotice.createTime).format('YYYY-MM-DD')}</div>
+                </div>
+                {/* <Divider type='vertical' /> */}
+                <div className='user-post-info-box'>
+                  <div className='user-post-title'>{topNotice.title}</div>
+                  <div className='user-post-info'>{topNotice.info}</div>
+                </div>
+              </div>
+              <div className='user-post-info-close' onClick={() => setTopNotice({})}>
+                <CloseOutlined />
+              </div>
+            </div>
+            <Divider />
+          </>
+          : null
+      }
       <div className='user-info-row'>
         <div className='user-info'>
           <Avatar size="large" style={avatarStyle} icon={<UserOutlined />} />
           <div className='user-name-box'>
-            <div className='user-name'>hahah</div>
+            <div className='user-name'>{user?.phone}</div>
             <div className='user-name-info'>欢迎登录账户中心</div>
+            <div className='user-name-last-login'>最近登录：{user?.lastLogin}</div>
           </div>
         </div>
         <div className='user-balance'>
-          <Statistic title="账户余额（元）" value={112893} precision={2} />
+          <Statistic title="账户余额（元）" value={accountInfo?.balance || 0} precision={2} />
         </div>
         <div className='user-withdraw'>
           <div className='user-withdraw-btns'>
@@ -52,33 +95,37 @@ export default () => {
               <Button className='user-withdraw-btn'  type='primary'>提现</Button>
             </Link> 
           </div>
-          <div className='user-withdraw-balance'>
+          {/* <div className='user-withdraw-balance'>
             提现处理中的金额：<span className='user-balance-red'>￥10000</span>
-          </div>
+          </div> */}
         </div>
       </div>
       <Divider />
       <div className='user-account-info-row'>
         <Descriptions title="账户信息">
           <Descriptions.Item label="实名认证">
-            <Button size='small' type='link' onClick={() => setShowUserDetailCard(pre => !pre)}>已实名</Button>
-            <Link to="/verified">去实名</Link>
+            {
+              accountInfo?.realStatus !== -1 ? (
+                <Button size='small' type='link' onClick={() => setShowUserDetailCard(pre => !pre)}>已实名</Button>
+              ):
+              (<Link to="/verified">去实名</Link>)
+            }
           </Descriptions.Item>
           <Descriptions.Item label="手机号码">
-            1810000000 
+            {user?.phone} 
             <Button size='small' type='link'>修改</Button>
           </Descriptions.Item>
           <Descriptions.Item label="密码">****** <Button size='small' type='link'>修改</Button></Descriptions.Item>
-          <Descriptions.Item label="支付宝账号">****** <Button onClick={() => setAddUncard('ali')} size='small' type='link'>修改</Button></Descriptions.Item>
-          <Descriptions.Item label="微信账号">****** <Button onClick={() => setAddUncard('wechat')} size='small' type='link'>修改</Button></Descriptions.Item>
-          <Descriptions.Item label="银行卡账号"> <Link to='/withdraw'>查看</Link></Descriptions.Item>
+          <Descriptions.Item label="支付宝账号">{alipayAccount} <Button onClick={() => setAddUncard('ali')} size='small' type='link'>{alipayAccount ? '修改' : '新增'}</Button></Descriptions.Item>
+          <Descriptions.Item label="微信账号">{wechatAccount} <Button onClick={() => setAddUncard('wechat')} size='small' type='link'>{wechatAccount ? '修改' : '新增'}</Button></Descriptions.Item>
+          <Descriptions.Item label="银行卡账号"> <Link to='/bankCard'>查看</Link></Descriptions.Item>
         </Descriptions>
       </div>
       {
         showUserDetailCard ? <UserDetailCard onCancel={() => setShowUserDetailCard(pre => !pre)} /> : null
       }
       {
-        showAddUncard ? <AddUncard payType={showAddUncard} onCancel={() => setAddUncard('')} account='123' /> : ''
+        showAddUncard ? <AddUncard payType={showAddUncard} onCancel={() => setAddUncard('')} account={showAddUncard === 'ali' ? alipayAccount : wechatAccount} refresh={searchPaymentAccount} /> : ''
       }
     </div>
   )
@@ -118,21 +165,28 @@ type AddUncardProps = {
   payType: PayType;
   onCancel: () => void;
   account?: string;
+  refresh: () => void;
 }
 const AddUncard = (props: AddUncardProps) => {
-  const { payType, onCancel, account } = props
+  const { payType, onCancel, account, refresh } = props
   const [form] = Form.useForm();
-  
+  const isAli = payType === 'ali'
   const onOK = () => {
     form.validateFields()
-    .then((value) => {
-      console.log('value', value)
-      onCancel()
-    })
+      .then((value) => {
+        (isAli ?  updateAlipay : updateWechat)({ urlParams: [value.account] })
+          .then((resp) => {
+            message.success('账号修改成功')
+            onCancel();
+            refresh()
+          })
+      })
   }
+  
   useEffect(() => {
     form.setFieldValue('account', account)
   }, [])
+
   return (
     <Modal
       title={`${!account ? '新增': '编辑'}${payTypeObj[payType]}账号`}

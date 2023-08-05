@@ -1,0 +1,17 @@
+.platform-info-detail-layout {
+  padding: 0 20px;
+}
+.platform-info-detail-header-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.platform-info-detail-content {
+  padding-bottom: 20px;
+}
+.platform-info-detail-footer {
+  line-height: 24px;
+}
+.platform-info-detail-next, .platform-info-detail-previous {
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.platform-post-layout {
+  padding: 20px;
+}
+.platform-post-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+.platform-post {
+  display: flex;
+  padding-top: 2px;
+}
+.platform-post-left {
+  padding: 0 10px;
+}
+.platform-post-right {
+  padding: 0 10px;
+}
+.platform-post-right-title {
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+.platform-post-right-content {
+
+}

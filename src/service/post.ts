@@ -27,7 +27,8 @@ export const getFaq = () => get({ url:'/api/v1/platform/faq' })
 export const getExchangeAgreement = () => get({ url:'/api/v1/platform/exchangeAgreement' })
 // 商务合作
 export const getCooperation = () => get({ url:'/api/v1/platform/cooperation' })
-// 联系我们
-export const getContact = () => get({ url:'/api/v1/platform/contact' })
 // 关于我们
 export const getAbout = () => get({ url:'/api/v1/platform/about' })
+
+// 联系我们
+export const getContact = () => get({ url:'/api/v1/platform/contact' })

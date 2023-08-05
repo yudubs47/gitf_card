@@ -1,0 +1,13 @@
+.platform-info-layout {
+  padding: 0 20px;
+}
+.platform-info-line {
+  display: flex;
+  justify-content: space-between;
+  line-height: 32px;
+  cursor: pointer;
+}
+.platform-info-list-header {
+  font-size: 18px;
+  font-weight: bold;
+}

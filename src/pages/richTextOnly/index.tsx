@@ -28,8 +28,8 @@ export default () => {
 
   return (
     <div className='rich-text-only-layout' >
-      {/* <div dangerouslySetInnerHTML={{__html: richText}}></div> */}
-      <div className='rich-text-only'>{richText}</div>
+      <div dangerouslySetInnerHTML={{__html: richText}}></div>
+      {/* <div className='rich-text-only'>{richText}</div> */}
     </div>
   )
 }

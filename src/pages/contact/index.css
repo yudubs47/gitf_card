@@ -1,0 +1,25 @@
+.contact-layout {
+  padding: 0 20px;
+}
+.contact-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+.contact-line {
+  line-height: 32px;
+  display: flex;
+
+}
+.contact-list-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+.contact-line-label, .contact-line-value{
+  font-size: 14px;
+}
+.contact-line-label {
+  font-weight: bold;
+}
+.contact-line-value {
+
+}

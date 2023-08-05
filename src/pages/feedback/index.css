@@ -1,30 +1,29 @@
-.register-logout {
+.feedback-logout {
   min-height: 100%;
-  min-width: 600px;
+  width: 600px;
   display: flex;
   justify-content: space-around;
 }
-.register-box {
+.feedback-box {
   width: 500px;
   padding: 30px;
   border-radius: 10px;
 }
-.register-header {
+.feedback-header {
   display: flex;
   align-items: baseline;
-  justify-content: center;
   color: rgba(0, 0, 0, 0.88);
   padding-bottom: 30px;
 }
-.register-header-title {
+.feedback-header-title {
   font-size: 28px;
   margin-right: 20px;
   font-weight: bold;
 }
-.register-header-subtitle {
+.feedback-header-subtitle {
   font-size: 14px;
 }
-.register-switch {
+.feedback-switch {
   display: flex;
   justify-content:center;
   align-items: center;

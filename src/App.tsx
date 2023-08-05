@@ -19,6 +19,11 @@ import Phone from './pages/phone'
 import BankCard from './pages/bankCard'
 import PayPassword from './pages/payPassword'
 import RichTextOnly from './pages/richTextOnly';
+import PlatformPost from './pages/platformPost';
+import PlatformInfo from './pages/platformInfo';
+import PlatformInfoDetail from './pages/platformInfoDetail';
+import Feedback from './pages/feedback';
+import Contact from './pages/contact'
 
 const router = createHashRouter([
   {
@@ -36,6 +41,11 @@ const router = createHashRouter([
       { path: '/bankCard', element: <BankCard /> },
       { path: '/payPassword', element: <PayPassword /> },
       { path: '/richTextOnly/:type', element: <RichTextOnly /> },
+      { path: '/platformPost', element: <PlatformPost /> },
+      { path: '/platformInfo', element: <PlatformInfo /> },
+      { path: '/platformInfoDetail/:id', element: <PlatformInfoDetail /> },
+      { path: '/feedback', element: <Feedback /> },
+      { path: '/contact', element: <Contact /> },
     ]
   },
   {
