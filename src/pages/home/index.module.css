@@ -1,0 +1,201 @@
+.layout {
+  min-height: 600px;
+  background: rgba(0, 0, 0, 0.05);
+  padding-bottom: 30px;
+}
+.carouselBox {
+
+}
+.carouselImgBox {
+  background-color: #364d79;
+  color: #ffffff;
+  height: 300px;
+}
+.noticeBox {
+  position: relative;
+  top: -10px;
+  height: 60px;
+  margin: 0 40px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.noticeMark {
+  transform: rotate(-0.125turn);
+  font-size: 16px;
+  width: 80px;
+  line-height: 28px;
+  text-align: center;
+  color: #ffffff;
+  /* font-weight: bold; */
+  background-color: #f57634;
+  position: absolute;
+  padding-top: 22px;
+  top: -15px;
+  left: -30px;
+}
+.noticeRightMark {
+  color: gray;
+  position: absolute;
+  top: 22px;
+  right: 10px;
+}
+.notice {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  margin: 0 60px;
+  cursor: pointer;
+}
+.noticeMonth {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+.noticeYear {
+  font-size: 14px;
+  line-height: 20px;
+}
+.noticeRight {
+  padding-left: 20px;
+}
+.noticeHeader {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+.noticeInfo {
+  font-size: 14px;
+  line-height: 20px;
+}
+.explainBox {
+  margin: 0 100px;
+}
+.explain {
+  color: #f57634;
+  font-size: 24px;
+  font-weight: bold;
+}
+.subexplain {
+  position: relative;
+  top: -5px;
+  font-size: 14px;
+  color: gray;
+  text-align: center;
+}
+.optStage {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.stageOneIocn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 80px;
+  width: 80px;
+  font-size: 24px;
+  border-radius: 40px;
+  color: #ffffff;
+  background: linear-gradient(to right bottom, rgb(157, 157, 225), rgb(68, 68, 217)); 
+}
+.stageOneTitle {
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+}
+.stageTwo {
+  font-size: 14px;
+  padding-bottom: 32px;
+}
+.dashLine {
+  flex-grow: 1;
+  border-bottom: 1px dashed gray;
+  margin: 0 10px;
+  margin-bottom: 32px;
+}
+.cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  padding: 20px 60px;
+  background: #ffffff;
+}
+.cardItem {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  width: 200px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: gray;
+}
+.cardItem:hover {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0, 0.8);
+}
+.cardIcon {
+  font-size: 28px;
+}
+.cardName {
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.middle {
+  background: #ffffff;
+  padding-bottom: 20px;
+}
+.explainBoxMargin {
+  margin-top: 30px;
+}
+
+.advantageCardsBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.advantageCardBox {
+  padding: 20px;
+  border-radius: 6px;
+  width: 240px;
+  height: 370px;
+  /* border: 1px solid #eee; */
+  cursor: pointer;
+}
+.advantageCardBox:hover {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+.advantageTitle {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.advantageInfo {
+  font-size: 14px;
+}
+.advantageCardImg {
+  background-color: #364d79;
+  height: 200px;
+  width: 200px;
+}
+.guideLine {
+  display: flex;
+  justify-content: center;
+}
+.guideBtn {
+  width: 80px;
+  padding: 15px 30px;
+  margin: 10px 10px;
+}

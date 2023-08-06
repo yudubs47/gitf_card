@@ -2,6 +2,8 @@ import { useState, createContext, useMemo, useEffect, useCallback } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { getAccountView } from './service/user'
+
 import './App.css'
 import Root from './components/root'
 import Error from './pages/error'
@@ -24,16 +26,25 @@ import PlatformInfo from './pages/platformInfo';
 import PlatformInfoDetail from './pages/platformInfoDetail';
 import Feedback from './pages/feedback';
 import Contact from './pages/contact'
-
-import { getAccountView } from './service/user'
+import Home from './pages/home';
 
 const router = createHashRouter([
+  {
+    path: '/',
+    element: <Root/>,
+    errorElement: <Error />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/home', element: <Home /> },
+      { path: '/login', element: <Login /> },
+      { path: '/forget', element: <Forget /> },
+    ]
+  },
   {
     path: '/',
     element: <Root showSiderBar />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Cards /> },
       { path: '/cards', element: <Cards /> },
       { path: '/orders', element: <Orders /> },
       { path: '/profile', element: <Profile /> },
@@ -50,15 +61,6 @@ const router = createHashRouter([
       { path: '/contact', element: <Contact /> },
       { path: '/register', element: <Register /> },
       { path: '/verified', element: <Verified /> }
-    ]
-  },
-  {
-    path: '/',
-    element: <Root/>,
-    errorElement: <Error />,
-    children: [
-      { path: '/login', element: <Login /> },
-      { path: '/forget', element: <Forget /> },
     ]
   },
 ])

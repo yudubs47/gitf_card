@@ -14,8 +14,9 @@
   height: calc(100% - 48px);
 }
 .main-content {
-  height: calc(100% - 24px);
+  height: calc(100% - 12px);
   margin: 12px;
+  margin-bottom: 0;
   padding: 12px;
   border-radius: 6px;
   background: #fff;
@@ -23,10 +24,9 @@
   overflow-y: auto;
 }
 .main-content-bo-padding {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
-  padding: 12px;
-  border-radius: 6px;
+  padding: 0;
   background: #fff;
   overflow-y: auto;
 }
@@ -37,4 +37,23 @@
 .main-content-sider {
   height: calc(100% - 43px);
   overflow-y: auto;
+}
+.main-footer {
+  text-align: center;
+  padding: 0;
+  line-height: 32px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: rgba(0, 0, 0, 0.8);
+  /* background: rgba(0, 0, 0, 0.05); */
+}
+.main-footer a {
+  color: rgba(0, 0, 0, 0.8);
+}
+.main-header-link {
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0 !important;
+}
+.main-header-link-active {
+  border-bottom: 2px solid #00B96B;
 }

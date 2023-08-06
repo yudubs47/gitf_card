@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, theme, Avatar, Dropdown  } from 'antd';
+import { Layout, Menu, theme, Avatar, Dropdown, Button } from 'antd';
 import './index.css'
 import { MainContext } from '../../App'
 
@@ -145,6 +145,11 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
     <Layout className='main-layout'>
       <Header className='main-header' style={headerStyle}>
         <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>
+        <div className="main-header-middle">
+          <Button className={!(location.pathname === '/' || location.pathname === '/home') ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/')} type="link">首页</Button>
+          <Button className={location.pathname !== '/cards' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/cards')} type="link">卡券回收</Button>
+          <Button className={location.pathname !== '/platformPost' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/platformPost')} type="link">最新公告</Button>
+        </div>
         <Dropdown
           menu={{
             items: 
@@ -161,7 +166,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
       <Layout className='content-layout'>
         {
           showSiderBar ?
-            <Sider className='main-content-sider' theme='light' width={200} collapsible collapsedWidth={50}>
+            <Sider className='main-content-sider' defaultCollapsed theme='light' width={200} collapsible collapsedWidth={50}>
               <Menu
                 selectedKeys={selectKeys}
                 mode="inline"
@@ -174,9 +179,12 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
         }
         <Content className={showSiderBar ?  'main-content' : 'main-content-bo-padding'} id="detail" >
           <Outlet/>
+          {/* <div className="main-footer">
+            copyright copy; 2019-2021 版权所有xxxx限公司 ICP证：<a href="https://beian.miit.gov.cn/" >辽ICP备2022011435号-2</a>
+          </div> */}
         </Content>
       </Layout>
-      {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
+      <Footer className="main-footer" >copyright copy; 2019-2021 版权所有xxxx限公司 ICP证：<a href="https://beian.miit.gov.cn/" >辽ICP备2022011435号-2</a></Footer>
     </Layout>
   );
 };
