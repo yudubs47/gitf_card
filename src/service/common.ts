@@ -11,5 +11,7 @@ export const updatePasswordPost = (params: ReqParams) => post({ url:'/api/v1/aut
 
 export const logoutPost = (params?: ReqParams) => post({ url:'/api/v1/auth/logout', ...(params || {}) })
 
+export const updatePhonePost = (params: ReqParams) => post({ url:'/api/v1/auth/updatePhone', ...params })
+
 // 所有卡种
 export const getAllCard = () => get({ url:'/api/v1/platform/allCard' })

@@ -1,7 +1,6 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { Link } from "react-router-dom";
-import { VideoCameraOutlined } from '@ant-design/icons';
 import './index.css'
 import ImgValidateInput from '../../components/imgValidateInput'
 import { registerPost, sendSmsPost } from '../../service/common'
@@ -83,6 +82,12 @@ export default () => {
       })
     }
   ]), [password])
+
+  useEffect(() => {
+    return () => {
+      clearInterval(counter.current)
+    }
+  }, [])
 
   return (
     <div className='register-logout'>

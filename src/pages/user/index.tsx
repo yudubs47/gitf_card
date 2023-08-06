@@ -51,7 +51,6 @@ export default () => {
     searchPaymentAccount()
   }, [])
   
-
   return (
     <div className='user-logout'>
       {
@@ -113,9 +112,9 @@ export default () => {
           </Descriptions.Item>
           <Descriptions.Item label="手机号码">
             {user?.phone} 
-            <Button size='small' type='link'>修改</Button>
+            <Link to="/phone">修改</Link>
           </Descriptions.Item>
-          <Descriptions.Item label="密码">****** <Button size='small' type='link'>修改</Button></Descriptions.Item>
+          <Descriptions.Item label="密码">****** <Link to="/forget">修改</Link></Descriptions.Item>
           <Descriptions.Item label="支付宝账号">{alipayAccount} <Button onClick={() => setAddUncard('ali')} size='small' type='link'>{alipayAccount ? '修改' : '新增'}</Button></Descriptions.Item>
           <Descriptions.Item label="微信账号">{wechatAccount} <Button onClick={() => setAddUncard('wechat')} size='small' type='link'>{wechatAccount ? '修改' : '新增'}</Button></Descriptions.Item>
           <Descriptions.Item label="银行卡账号"> <Link to='/bankCard'>查看</Link></Descriptions.Item>

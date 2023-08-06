@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown  } from 'antd';
 import './index.css'
+import { MainContext } from '../../App'
 
 import { logoutPost } from '../../service/common'
 
@@ -119,6 +120,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
   const { showSiderBar } = props
   const nav = useNavigate()
   const location = useLocation()
+  const [userInfo] = useContext(MainContext)
 
   const menuSelect = useCallback(({ key }: any) => {
     if(key.indexOf('__') === -1) {
@@ -143,21 +145,18 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
     <Layout className='main-layout'>
       <Header className='main-header' style={headerStyle}>
         <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>
-        {
-          showSiderBar ?
-            <Dropdown
-              menu={{
-                items: [
-                  { key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> },
-                ] 
-              }} 
-              placement="bottomRight"
-              arrow={{ pointAtCenter: true }
-            }>
-              <Avatar onClick={() => nav('/user')} icon={<UserOutlined />}  /> 
-            </Dropdown>
-          : ''
-        }
+        <Dropdown
+          menu={{
+            items: 
+              userInfo ?
+                [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> }]:
+                [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav('/login')}>登录</div> }]
+          }} 
+          placement="bottomRight"
+          arrow={{ pointAtCenter: true }
+        }>
+          <Avatar onClick={() => nav(userInfo ? '/user' : '/login')} icon={<UserOutlined />}  /> 
+        </Dropdown>
       </Header>
       <Layout className='content-layout'>
         {
