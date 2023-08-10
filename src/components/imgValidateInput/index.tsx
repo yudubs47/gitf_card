@@ -9,7 +9,7 @@ export default (props: any) => {
       {...rest}
       addonAfter={<img
         onClick={onImgCodeClick || updateKey}
-        src={token ? `/api/v1/auth/imageCode/${token}` : `/api/v1/auth/imageCode?key=${key}`}
+        src={token ? `http://185.106.177.48:9101/api/v1/auth/imageCode/${token}` : `http://185.106.177.48:9101/api/v1/auth/imageCode?key=${key}`}
         height={28}
       />}
     />
