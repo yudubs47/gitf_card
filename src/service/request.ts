@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 const request = axios.create({
+  baseURL: 'http://185.106.177.48:9101/',
   headers: {
     tahm_kench: window.localStorage.getItem('token')
   }
