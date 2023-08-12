@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './index.css'
 import ImgValidateInput from '../../components/imgValidateInput'
 import { registerPost, sendSmsPost } from '../../service/common'
@@ -28,6 +28,7 @@ export default () => {
   const password = Form.useWatch('password', form);
   const [count, setCount] = useState(-1)
   const counter = useRef<any>(null)
+  const nav = useNavigate()
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
@@ -41,6 +42,8 @@ export default () => {
       .then((resp) => {
         console.log('register success', resp)
         // form.resetFields()
+        window.localStorage.setItem('token', resp.token)
+        nav('/')
       })
     
   }, [form])

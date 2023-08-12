@@ -7,6 +7,7 @@ const request = axios.create({
   }
 })
 request.interceptors.response.use(function (response) {
+  console.log('---resp data---', response.data)
   return response.data;
 }, function (error) {
   return Promise.reject(error);
@@ -22,12 +23,17 @@ export type GetParams = {
   url: string;
 } & ReqParams
 
+type Resp = {
+  code: string | number;
+  message: string;
+  data: any;
+}
+
 export const get = (getParams: GetParams) => {
   const {url, params, urlParams} = getParams
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
-  const reqFn = request.get<any>(reqUrl, params)
+  const reqFn = request.get<any, Resp>(reqUrl, params)
     .then(function (response) {
-      console.log('response', response)
       if(response.code === '0') {
         // message.success(response.message)
         return response.data
@@ -45,9 +51,8 @@ export const get = (getParams: GetParams) => {
 export const post = (getParams: GetParams) => {
   const {url, params, urlParams, config} = getParams
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
-  const reqFn = request.post<any>(reqUrl, params, config)
+  const reqFn = request.post<any, Resp>(reqUrl, params, config)
     .then(function (response) {
-      console.log('response', response)
       if(response.code === '0') {
         // message.success(response.message)
         return response.data

@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import styles from './index.module.css'
 import { platformNoticePost } from '../../service/post'
- console.log('styles', styles)
 
 export default () => {
   const [item, setItem] = useState<any>({})

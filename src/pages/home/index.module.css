@@ -150,6 +150,7 @@
 .middle {
   background: #ffffff;
   padding-bottom: 20px;
+  overflow: hidden;
 }
 .explainBoxMargin {
   margin-top: 30px;
@@ -162,6 +163,7 @@
   padding-top: 30px;
   margin-left: 60px;
   margin-right: 60px;
+  overflow: hidden;
 }
 .advantageCardBox {
   padding: 20px;
