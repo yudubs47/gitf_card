@@ -1,0 +1,10 @@
+.layout {
+  min-height: 100%;
+}
+.marginRight10 {
+  margin-right: 10px;
+}
+.formItem {
+  margin-left: 10px;
+  margin-bottom: 10px !important;
+}

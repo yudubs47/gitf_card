@@ -27,6 +27,7 @@ import PlatformInfoDetail from './pages/platformInfoDetail';
 import Feedback from './pages/feedback';
 import Contact from './pages/contact'
 import Home from './pages/home';
+import SellingRecord from './pages/sellingRecord';
 
 const router = createHashRouter([
   {
@@ -60,7 +61,8 @@ const router = createHashRouter([
       { path: '/feedback', element: <Feedback /> },
       { path: '/contact', element: <Contact /> },
       { path: '/register', element: <Register /> },
-      { path: '/verified', element: <Verified /> }
+      { path: '/verified', element: <Verified /> },
+      { path: '/sellingRecord', element: <SellingRecord /> }
     ]
   },
 ])

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
-import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined } from '@ant-design/icons';
+import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined, FundOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown, Button } from 'antd';
 import './index.css'
@@ -27,20 +27,20 @@ const menuConfig: MenuProps['items'] = [
     icon: <AccountBookOutlined />,
     label: '提现',
   },
+  // {
+  //   key: 'orders',
+  //   icon: <ProfileOutlined />,
+  //   label: '订单列表',
+  // },
   {
-    key: 'orders',
-    icon: <ProfileOutlined />,
-    label: '订单列表',
+    key: 'sellingRecord',
+    icon: <FundOutlined />,
+    label: '提卡记录',
   },
   {
     key: 'user',
     icon: <UserOutlined />,
     label: '用户中心',
-  },
-  {
-    key: 'verified',
-    icon: <UserOutlined />,
-    label: '实名验证',
   },
   {
     key: '__platformPost',
