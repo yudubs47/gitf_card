@@ -43,6 +43,11 @@ const menuConfig: MenuProps['items'] = [
     label: '用户中心',
   },
   {
+    key: 'verified',
+    icon: <UserOutlined />,
+    label: '实名认证',
+  },
+  {
     key: '__platformPost',
     icon: <BellOutlined />,
     label: '最新公告',
