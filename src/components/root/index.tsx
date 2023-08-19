@@ -120,7 +120,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
   const { showSiderBar } = props
   const nav = useNavigate()
   const location = useLocation()
-  const [userInfo] = useContext(MainContext)
+  const [userInfo, refresh] = useContext(MainContext)
 
   const menuSelect = useCallback(({ key }: any) => {
     if(key.indexOf('__') === -1) {
@@ -137,6 +137,9 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
     logoutPost()
       .then(() => {
         window.localStorage.setItem('token', '')
+        if(refresh) {
+          refresh()
+        }
         nav('/login')
       })
   }
@@ -184,7 +187,6 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
           </div> */}
         </Content>
       </Layout>
-      <Footer className="main-footer" >copyright copy; 2019-2021 版权所有xxxx限公司 ICP证：<a href="https://beian.miit.gov.cn/" >辽ICP备2022011435号-2</a></Footer>
     </Layout>
   );
 };

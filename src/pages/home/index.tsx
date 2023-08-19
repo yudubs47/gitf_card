@@ -215,6 +215,7 @@ export default () => {
         <Button size={"large"} className={styles.guideBtn} type={"default"} onClick={() => nav('/richTextOnly/cooperation')}>商家合作</Button>
         <Button size={"large"} className={styles.guideBtn} type={"default"} onClick={() => nav('/platformPost')}>更多</Button>
       </div>
+      <div className={styles['main-footer']} >copyright copy; 2019-2021 版权所有xxxx限公司 ICP证：<a href="https://beian.miit.gov.cn/" >辽ICP备2022011435号-2</a></div>
     </div>
   )
 }

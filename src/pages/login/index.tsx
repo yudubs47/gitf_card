@@ -1,10 +1,11 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useMemo, useRef,useContext } from 'react';
 import { Tabs, Segmented, Avatar, Radio, Form, Input, Checkbox, Button, Select, Divider, Typography } from 'antd';
 import { Link, useNavigate } from "react-router-dom";
 import { VideoCameraOutlined } from '@ant-design/icons';
 import './index.css'
 import { loginPassPost, loginVerifyCodePost, sendSmsPost } from '../../service/common'
 import ImgValidateInput from '../../components/imgValidateInput'
+import { MainContext } from '../../App'
 
 const nameRules = [{ required: true, message: '请输入用户名/邮箱/手机号' }]
 const passwardRules = [{ required: true, message: '请输入密码' }]
@@ -20,6 +21,7 @@ export default () => {
   const counter = useRef<any>(null)
   const imageCode = Form.useWatch('imageCode', form);
   const navigate = useNavigate()
+  const [userInfo, refresh] = useContext(MainContext)
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
@@ -28,6 +30,9 @@ export default () => {
       loginVerifyCodePost({ params: { phone: value.phoneNumber, verifyCode: value.code, } }))
         .then((resp) => {
           window.localStorage.setItem('token', resp.token)
+          if(refresh) {
+            refresh()
+          }
           navigate('/')
         })
       // form.resetFields()
