@@ -113,11 +113,11 @@ const menuConfig: MenuProps['items'] = [
         icon: <UserOutlined />,
         label: '企业回收',
       },
-      // {
-      //   key: 'richTextOnly/recycle',
-      //   icon: <UserOutlined />,
-      //   label: 'api接口',
-      // },
+      {
+        key: 'apiManage',
+        icon: <UserOutlined />,
+        label: 'api接口',
+      },
       {
         key: 'feedback',
         icon: <UserOutlined />,

@@ -96,7 +96,7 @@ export default () => {
   return (
     <div className={styles.layout} >
     <Spin spinning={!notloading}>
-      <div className={styles.pageTitle} onClick={() => setWithdrawId(1)}>
+      <div className={styles.pageTitle}>
         提款记录
       </div>
       <div className={styles.formBox}>

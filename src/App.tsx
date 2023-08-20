@@ -32,6 +32,7 @@ import WithdrawRecord from './pages/withdrawRecord';
 import ManagerLogin from './pages/managerLogin';
 import ManagerSellingRecord from './pages/managerSellingRecord';
 import ManagerWithdrawRecord from './pages/managerWithdrawRecord';
+import ApiManage from './pages/apiManage';
 
 const router = createHashRouter([
   {
@@ -71,6 +72,7 @@ const router = createHashRouter([
       { path: '/withdrawRecord', element: <WithdrawRecord /> },
       { path: '/managerSellingRecord', element: <ManagerSellingRecord /> },
       { path: '/managerWithdrawRecord', element: <ManagerWithdrawRecord /> },
+      { path: '/apiManage', element: <ApiManage /> },
     ]
   },
 ])
