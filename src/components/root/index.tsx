@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
-import { UserOutlined, RadarChartOutlined, AccountBookOutlined, ProfileOutlined, BookOutlined, BellOutlined, FundOutlined } from '@ant-design/icons';
+import { UserOutlined, RadarChartOutlined, AccountBookOutlined, TransactionOutlined, BookOutlined, BellOutlined, FundOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown, Button } from 'antd';
 import './index.css'
@@ -36,6 +36,11 @@ const menuConfig: MenuProps['items'] = [
     key: 'sellingRecord',
     icon: <FundOutlined />,
     label: '提卡记录',
+  },
+  {
+    key: 'withdrawRecord',
+    icon: <TransactionOutlined />,
+    label: '提款记录',
   },
   {
     key: 'user',
