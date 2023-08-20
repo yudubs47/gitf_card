@@ -2,9 +2,6 @@ import axios from 'axios'
 import { message } from 'antd'
 const request = axios.create({
   baseURL: 'http://185.106.177.48:9101/',
-  headers: {
-    tahm_kench: window.localStorage.getItem('token')
-  }
 })
 request.interceptors.response.use(function (response) {
   console.log('---resp data---', response.data)
@@ -30,6 +27,7 @@ type Resp = {
 }
 
 export const get = (getParams: GetParams) => {
+  request.defaults.headers.common['tahm_kench'] = window.localStorage.getItem('token')
   const {url, params, urlParams} = getParams
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
   const reqFn = request.get<any, Resp>(reqUrl, params)
@@ -49,7 +47,8 @@ export const get = (getParams: GetParams) => {
 }
 
 export const post = (getParams: GetParams) => {
-  const {url, params, urlParams, config} = getParams
+  request.defaults.headers.common['tahm_kench'] = window.localStorage.getItem('token')
+  const {url, params, urlParams, config={}} = getParams
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
   const reqFn = request.post<any, Resp>(reqUrl, params, config)
     .then(function (response) {

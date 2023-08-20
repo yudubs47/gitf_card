@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
-import { Button, Form, Input, Spin } from 'antd';
+import { Button, Form, Input, Spin, Modal, QRCode } from 'antd';
 import { Link } from "react-router-dom";
 import styles from './index.module.css'
 import { realFacePost, inputRealPost } from '../../service/user'
@@ -28,7 +28,13 @@ export default () => {
       realFacePost({ params: metaInfo })
         .then(resp => {
           if(resp) {
-            window.location.href = resp
+            Modal.info({
+              width: '275px',
+              title: '支付宝扫码',
+              content: (
+                <QRCode value={resp} />
+              )
+            })
           }
         })
         .finally(subLoading)
@@ -38,7 +44,6 @@ export default () => {
   }, [])
 
   const onFinish = useCallback((value: any) => {
-    console.log('value', value)
     const name = (value.name || '').trim()
     const id = (value.id || '').trim()
     addLoading()
@@ -71,6 +76,7 @@ export default () => {
         </Form>
       </div>
       </Spin>
-      </div>
+
+    </div>
   )
 }
