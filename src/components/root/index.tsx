@@ -125,11 +125,11 @@ const menuConfig: MenuProps['items'] = [
       },
     ]
   },
-  {
-    key: 'managerLogin',
-    icon: <StarOutlined />,
-    label: '管理员登录',
-  },
+  // {
+  //   key: 'managerLogin',
+  //   icon: <StarOutlined />,
+  //   label: '管理员登录',
+  // },
 ]
 
 const managerMenuConfig: MenuProps['items'] = [
@@ -211,7 +211,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
       <Layout className='content-layout'>
         {
           showSiderBar ?
-            <Sider className='main-content-sider' defaultCollapsed theme='light' width={200} collapsible collapsedWidth={50}>
+            <Sider className='main-content-sider' theme='light' width={200} collapsible collapsedWidth={50}>
               <Menu
                 selectedKeys={selectKeys}
                 mode="inline"

@@ -1,9 +1,10 @@
-import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
+import { useMemo, useCallback, useState, useRef, useEffect, useContext } from 'react';
 import { Button, Form, Input, Spin, Modal, QRCode } from 'antd';
 import { Link } from "react-router-dom";
 import styles from './index.module.css'
 import { realFacePost, inputRealPost } from '../../service/user'
 import useEven from '../../use/useEven';
+import { MainContext } from '../../App'
 
 const singleFormPorps = {
   labelCol: { span: 8 },
@@ -20,6 +21,7 @@ const idRules = [{ required: true, message: '请输入身份证号码' }, { patt
 export default () => {
   const [form] = Form.useForm();
   const [notloading, addLoading, subLoading] = useEven()
+  const {userInfo, refreshUserInfo} = useContext(MainContext)
 
   const reqRealface = useCallback(() => {
     if(window.getMetaInfo) {
@@ -55,6 +57,22 @@ export default () => {
       })
       .finally(subLoading)
   }, [form])
+
+  useEffect(() => {
+    // VALID(0, "已实名"), INPUT(1, "已录入"), INVALID(-1, "待实名")
+    if(userInfo) {
+      console.log('userInfo', userInfo)
+      if(userInfo.realStatus === 1) {
+        reqRealface()
+      }
+      if(userInfo.realStatus === 0) {
+        Modal.info({
+          title: '提示',
+          content: '已实名成功'
+        })
+      }
+    }
+  }, [userInfo])
 
   return (
     <div className={styles.verifiedLogout} >

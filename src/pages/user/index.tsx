@@ -115,7 +115,7 @@ export default () => {
         <Descriptions title="账户信息">
           <Descriptions.Item label="实名认证">
             {
-              accountInfo?.realStatus !== -1 ? (
+              accountInfo?.realStatus === 0 ? (
                 <Button size='small' type='link' onClick={setShowUserDetailCardFn}>已实名</Button>
               ):
               (<Link to="/verified">去实名</Link>)
