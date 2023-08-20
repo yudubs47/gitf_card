@@ -28,7 +28,7 @@ const imgCodeRules = [{ required: true, message: '请输入图形验证码' }]
 export default () => {
   const [form] = Form.useForm();
   const nav = useNavigate()
-  const [userInfo, updateUserInfo] = useContext(MainContext)
+  const {userInfo, refreshUserInfo} = useContext(MainContext)
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
@@ -42,8 +42,8 @@ export default () => {
     updatePhonePost({ params })
       .then(() => {
         message.success('修改手机号成功')
-        if(updateUserInfo) {
-          updateUserInfo()
+        if(refreshUserInfo) {
+          refreshUserInfo()
         }
         nav('/')
       })

@@ -1,12 +1,13 @@
 import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
-import { UserOutlined, RadarChartOutlined, AccountBookOutlined, TransactionOutlined, BookOutlined, BellOutlined, FundOutlined } from '@ant-design/icons';
+import { UserOutlined, RadarChartOutlined, AccountBookOutlined, TransactionOutlined, BookOutlined, BellOutlined, FundOutlined, StarOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown, Button } from 'antd';
 import './index.css'
 import { MainContext } from '../../App'
 
 import { logoutPost } from '../../service/common'
+import { managerLogout } from '../../service/manager'
 
 const headerStyle = {
   display: 'flex',
@@ -124,13 +125,23 @@ const menuConfig: MenuProps['items'] = [
       },
     ]
   },
+  {
+    key: 'managerLogin',
+    icon: <StarOutlined />,
+    label: '管理员登录',
+  },
+]
+
+const managerMenuConfig: MenuProps['items'] = [
+  { key: 'managerWithdrawRecord', label: '提现记录', },
+  { key: 'managerSellingRecord', label: '卖卡记录', },
 ]
 
 const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
   const { showSiderBar } = props
   const nav = useNavigate()
   const location = useLocation()
-  const [userInfo, refresh] = useContext(MainContext)
+  const {userInfo, refreshUserInfo, userType} = useContext(MainContext)
 
   const menuSelect = useCallback(({ key }: any) => {
     if(key.indexOf('__') === -1) {
@@ -143,37 +154,58 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
     return [key]
   }, [location.pathname])
 
+  const isManager = userType === 'manager'
+
   const logout = () => {
-    logoutPost()
-      .then(() => {
-        window.localStorage.setItem('token', '')
-        if(refresh) {
-          refresh()
-        }
-        nav('/login')
-      })
+    console.log('isManager', isManager)
+    if(isManager) {
+      managerLogout()
+        .then(() => {
+          window.localStorage.setItem('yone', '')
+          nav('/managerLogin')
+        })
+    } else {
+      logoutPost()
+        .then(() => {
+          window.localStorage.setItem('token', '')
+          if(refreshUserInfo) {
+            refreshUserInfo()
+          }
+          nav('/login')
+        })
+    }
   }
 
+  const isLoginPage = location.pathname == '/managerLogin' || location.pathname == '/login' || location.pathname == '/register'
+  
   return (
     <Layout className='main-layout'>
       <Header className='main-header' style={headerStyle}>
-        <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>
-        <div className="main-header-middle">
-          <Button className={!(location.pathname === '/' || location.pathname === '/home') ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/')} type="link">首页</Button>
-          <Button className={location.pathname !== '/cards' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/cards')} type="link">卡券回收</Button>
-          <Button className={location.pathname !== '/platformPost' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/platformPost')} type="link">最新公告</Button>
-        </div>
+        {isManager ? <Avatar icon={<RadarChartOutlined />} /> : <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>}
+        {
+          !isLoginPage ?
+            (isManager ?
+              <div className="main-header-middle">
+                <Button className={!(location.pathname === '/managerWithdrawRecord') ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/managerWithdrawRecord')} type="link">提现记录</Button>
+                <Button className={location.pathname !== '/managerSellingRecord' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/managerSellingRecord')} type="link">卖卡记录</Button>
+              </div> :
+              <div className="main-header-middle">
+                <Button className={!(location.pathname === '/' || location.pathname === '/home') ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/')} type="link">首页</Button>
+                <Button className={location.pathname !== '/cards' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/cards')} type="link">卡券回收</Button>
+                <Button className={location.pathname !== '/platformPost' ? 'main-header-link' : 'main-header-link main-header-link-active'} onClick={() => nav('/platformPost')} type="link">最新公告</Button>
+              </div>) : ''
+        }
         <Dropdown
           menu={{
             items: 
               userInfo ?
                 [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> }]:
-                [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav('/login')}>登录</div> }]
+                [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav(isManager ? '/managerLogin' : '/login')}>登录</div> }]
           }} 
           placement="bottomRight"
           arrow={{ pointAtCenter: true }
         }>
-          <Avatar onClick={() => nav(userInfo ? '/user' : '/login')} icon={<UserOutlined />}  /> 
+          <Avatar icon={<UserOutlined />}  /> 
         </Dropdown>
       </Header>
       <Layout className='content-layout'>
@@ -184,7 +216,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
                 selectedKeys={selectKeys}
                 mode="inline"
                 className='main-side-menu'
-                items={menuConfig}
+                items={isManager ? managerMenuConfig : menuConfig}
                 onSelect={menuSelect}
               />
             </Sider> :

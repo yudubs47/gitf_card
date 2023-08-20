@@ -28,7 +28,10 @@ import Feedback from './pages/feedback';
 import Contact from './pages/contact'
 import Home from './pages/home';
 import SellingRecord from './pages/sellingRecord';
-import WithdrawRecord from './pages/withdrawRecord'
+import WithdrawRecord from './pages/withdrawRecord';
+import ManagerLogin from './pages/managerLogin';
+import ManagerSellingRecord from './pages/managerSellingRecord';
+import ManagerWithdrawRecord from './pages/managerWithdrawRecord';
 
 const router = createHashRouter([
   {
@@ -40,6 +43,7 @@ const router = createHashRouter([
       { path: '/home', element: <Home /> },
       { path: '/login', element: <Login /> },
       { path: '/forget', element: <Forget /> },
+      { path: '/managerLogin', element: <ManagerLogin /> },
     ]
   },
   {
@@ -65,6 +69,8 @@ const router = createHashRouter([
       { path: '/verified', element: <Verified /> },
       { path: '/sellingRecord', element: <SellingRecord /> },
       { path: '/withdrawRecord', element: <WithdrawRecord /> },
+      { path: '/managerSellingRecord', element: <ManagerSellingRecord /> },
+      { path: '/managerWithdrawRecord', element: <ManagerWithdrawRecord /> },
     ]
   },
 ])
@@ -78,10 +84,23 @@ type UserInfo = {
   realName: string;
   realStatus: number;
 }
-export const MainContext = createContext([undefined, () => {} ])
+export const MainContext = createContext({
+  userInfo: undefined,
+  refreshUserInfo: () => {},
+  userType: 'manager', // manager || user
+  updateUserType: (type: 'manager' | 'user') => {}
+})
 
 function App() {
-  const [userInfo, setUserInfo] = useState<UserInfo>();
+  const [userInfo, setUserInfo] = useState();
+  const [userType, setUserType] = useState('user')
+
+  useEffect(() => {
+    const userType = window.localStorage.getItem('userType')
+    if(userType) {
+      setUserType(userType)
+    }
+  }, [])
 
   const getAccountViewFn = useCallback(() => {
     getAccountView()
@@ -89,12 +108,22 @@ function App() {
   }, [])
 
   useEffect(() => {
-    getAccountViewFn()
-  }, [])
+    if(userType === 'user') {
+      getAccountViewFn()
+    }
+  }, [userType])
 
   const mainValue = useMemo(() => {
-    return [userInfo, () => getAccountViewFn()]
-  }, [userInfo])
+    return {
+      userInfo,
+      refreshUserInfo: () => getAccountViewFn(),
+      userType,
+      updateUserType: (type: 'manager' | 'user') => {
+        setUserType(type)
+        window.localStorage.setItem('userType', type)
+      }
+    }
+  }, [userInfo, userType])
 
   return (
     <MainContext.Provider value={mainValue}>

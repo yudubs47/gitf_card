@@ -21,7 +21,7 @@ export default () => {
   const counter = useRef<any>(null)
   const imageCode = Form.useWatch('imageCode', form);
   const navigate = useNavigate()
-  const [userInfo, refresh] = useContext(MainContext)
+  const {userInfo, refreshUserInfo, updateUserType} = useContext(MainContext)
 
   const onFinish = useCallback((value: any) => {
     // 提交表单信息
@@ -30,8 +30,9 @@ export default () => {
       loginVerifyCodePost({ params: { phone: value.phoneNumber, verifyCode: value.code, } }))
         .then((resp) => {
           window.localStorage.setItem('token', resp.token)
-          if(refresh) {
-            refresh()
+          updateUserType('user')
+          if(refreshUserInfo) {
+            refreshUserInfo()
           }
           navigate('/')
         })
@@ -110,6 +111,10 @@ export default () => {
           <Divider type="vertical" />
           <Link to="/register">
             <Button type='link'>立即注册</Button>
+          </Link>
+          <Divider type="vertical" />
+          <Link to="/managerLogin">
+            <Button type='link'>管理员登录</Button>
           </Link>
         </div>
       </div>

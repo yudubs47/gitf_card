@@ -4,7 +4,7 @@ import { CloseOutlined, UserOutlined  } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import dayjs from 'dayjs'
 import './index.css'
-import { getAccountView } from '../../service/user'
+import { getAccountView, getShiren } from '../../service/user'
 import { getWechat, updateWechat, getAlipay, updateAlipay } from '../../service/payment'
 
 const formItemLayout = {
@@ -27,7 +27,7 @@ type PayType = 'ali' | 'wechat' | 'bank'
 const avatarStyle = { backgroundColor: '#87d068', marginRight: '20px' }
 
 export default () => {
-  const [showUserDetailCard, setShowUserDetailCard] = useState(false)
+  const [showUserDetailCard, setShowUserDetailCard] = useState()
   const [showAddUncard, setAddUncard] = useState<PayType | ''>('')
   const [accountInfo, setAccountInfo] = useState<any>({})
   const [topNotice, setTopNotice] = useState<any>({})
@@ -50,6 +50,17 @@ export default () => {
       })
     searchPaymentAccount()
   }, [])
+
+  const setShowUserDetailCardFn = useCallback(() => {
+    if(showUserDetailCard) {
+      setShowUserDetailCard(undefined)
+    } else {
+      getShiren()
+        .then(resp => {
+          setShowUserDetailCard(resp)
+        })
+    }
+  }, [showUserDetailCard])
   
   return (
     <div className='user-logout'>
@@ -105,7 +116,7 @@ export default () => {
           <Descriptions.Item label="实名认证">
             {
               accountInfo?.realStatus !== -1 ? (
-                <Button size='small' type='link' onClick={() => setShowUserDetailCard(pre => !pre)}>已实名</Button>
+                <Button size='small' type='link' onClick={setShowUserDetailCardFn}>已实名</Button>
               ):
               (<Link to="/verified">去实名</Link>)
             }
@@ -121,7 +132,7 @@ export default () => {
         </Descriptions>
       </div>
       {
-        showUserDetailCard ? <UserDetailCard onCancel={() => setShowUserDetailCard(pre => !pre)} /> : null
+        showUserDetailCard ? <UserDetailCard onCancel={setShowUserDetailCardFn} /> : null
       }
       {
         showAddUncard ? <AddUncard payType={showAddUncard} onCancel={() => setAddUncard('')} account={showAddUncard === 'ali' ? alipayAccount : wechatAccount} refresh={searchPaymentAccount} /> : ''
@@ -132,29 +143,30 @@ export default () => {
 
 const UserDetailCard = (props: any) => {
   const { onCancel } = props
+  // TODO 接口获取
   return (
     <Modal width={350} title='实名信息' open footer={false} onCancel={onCancel}>
       <div className='user-detail-card'>
         <div className='user-mame'>用户名</div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>证件类型：</div>
-          <div className='user-detail-card-value'>身份证</div>
+          <div className='user-detail-card-value'>-</div>
         </div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>证件号码：</div>
-          <div className='user-detail-card-value'>3501************31</div>
+          <div className='user-detail-card-value'>-</div>
         </div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>绑定手机：</div>
-          <div className='user-detail-card-value'>173****4695</div>
+          <div className='user-detail-card-value'>-</div>
         </div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>认证渠道：</div>
-          <div className='user-detail-card-value'>微信认证</div>
+          <div className='user-detail-card-value'>-</div>
         </div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>认证日期：</div>
-          <div className='user-detail-card-value'>2023-05-05</div>
+          <div className='user-detail-card-value'>-</div>
         </div>
       </div>
     </Modal>
