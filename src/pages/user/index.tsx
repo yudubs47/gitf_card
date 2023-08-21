@@ -1,11 +1,12 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
-import { Button, Modal, Form, Input, Radio, Select, Avatar, Statistic, Divider, Descriptions, message } from 'antd';
+import { Button, Modal, Form, Input, Radio, Select, Avatar, Statistic, Divider, Descriptions, message, Spin } from 'antd';
 import { CloseOutlined, UserOutlined  } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import dayjs from 'dayjs'
 import './index.css'
 import { getAccountView, getShiren } from '../../service/user'
 import { getWechat, updateWechat, getAlipay, updateAlipay } from '../../service/payment'
+import useEven from '../../use/useEven';
 
 const formItemLayout = {
   labelCol: { span: 5 },
@@ -34,6 +35,7 @@ export default () => {
   const [wechatAccount, setWechatAccount] = useState('')
   const [alipayAccount, setAlipayAccount] = useState('')
   const { user } = accountInfo
+  const [notloading, addLoading, subLoading] = useEven()
 
   const searchPaymentAccount = useCallback(() => {
     getWechat()
@@ -43,11 +45,13 @@ export default () => {
   }, [])
 
   useEffect(() => {
+    addLoading()
     getAccountView()
       .then((resp) => {
         setAccountInfo(resp)
         setTopNotice(resp.topNotice)
       })
+      .finally(subLoading)
     searchPaymentAccount()
   }, [])
 
@@ -64,6 +68,8 @@ export default () => {
   
   return (
     <div className='user-logout'>
+      <Spin spinning={!notloading}>
+        <>
       {
         topNotice?.id ?
           <>
@@ -137,6 +143,8 @@ export default () => {
       {
         showAddUncard ? <AddUncard payType={showAddUncard} onCancel={() => setAddUncard('')} account={showAddUncard === 'ali' ? alipayAccount : wechatAccount} refresh={searchPaymentAccount} /> : ''
       }
+      </>
+      </Spin>
     </div>
   )
 }
