@@ -97,9 +97,7 @@ function App() {
   const [userInfo, setUserInfo] = useState();
   const [userType, setUserType] = useState('user')
 
-  const location = useLocation()
-
-  const isManagerPage = location.pathname == '/managerLogin' || location.pathname == '/managerSellingRecord' || location.pathname == '/managerWithdrawRecord'
+  const isManagerPage = window.location.hash.indexOf('manager') !== -1
 
   useEffect(() => {
     const userType = window.localStorage.getItem('userType')
