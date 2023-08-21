@@ -133,13 +133,13 @@ export default () => {
         >
           <Form.Item label="提现方式" name="payType" initialValue='ali' >
             <Radio.Group >
-              <Radio.Button  value={'ali'}>
+              <Radio.Button  value={3}>
                 <RadioCard icon={<AlipayCircleOutlined />} name='支付宝' />
               </Radio.Button>
-              <Radio.Button value={'wechat'}>
+              <Radio.Button value={2}>
                 <RadioCard icon={<WechatOutlined />} name='微信' />
               </Radio.Button>
-              <Radio.Button value={'bank'}>
+              <Radio.Button value={1}>
                 <RadioCard icon={<CreditCardOutlined />} name='银行卡' />
               </Radio.Button>
             </Radio.Group>
