@@ -138,13 +138,13 @@ export default () => {
             <DatePicker.RangePicker format="YYYY-MM-DD" locale={locale} />
           </Form.Item>
           <Form.Item className={styles.formItem} name="cardId" label="卡种类型"  >
-            <Select options={cardList} allowClear placeholder="请选择卡种类型" />
+            <Select className="inline-select" options={cardList} allowClear placeholder="请选择卡种类型" />
           </Form.Item>
           <Form.Item className={styles.formItem} name="batchId" label="卡号"  >
             <Input  placeholder="请输入卡号" />
           </Form.Item>
           <Form.Item className={styles.formItem} name="status" label="提卡状态"  >
-            <Select options={statusOptions} allowClear placeholder="请选择提卡状态" />
+            <Select className="inline-select" options={statusOptions} allowClear placeholder="请选择提卡状态" />
           </Form.Item>
           <Form.Item className={styles.formItem} name="isApi" label="是否api"  >
             <Radio.Group >

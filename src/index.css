@@ -8,3 +8,6 @@ html, body, #root {
 .with-100 {
   width: 100%;
 }
+.inline-select {
+  min-width: 150px;
+}

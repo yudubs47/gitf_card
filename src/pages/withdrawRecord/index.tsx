@@ -21,6 +21,12 @@ const statusObj = statusOptions.reduce((pre, cur) => {
   return pre
 }, {} as any)
 
+const withdrawType = {
+  1: '银行卡',
+  2: '微信',
+  3: '支付宝'
+}
+
 const today = dayjs().startOf('day')
 const initTimes = [today.subtract(7, 'day'), today.add(1, 'day')]
 const initData = { times: initTimes }
@@ -37,7 +43,7 @@ export default () => {
     { title: '提现金额(元)', dataIndex: 'money' },
     { title: '手续费(元)', dataIndex: 'fee' },
     // { title: '实际到账(元)', dataIndex: 'balance' },
-    { title: '提现类型', dataIndex: 'type' },
+    { title: '提现类型', dataIndex: 'type', render: text => withdrawType[text] },
     { title: '提现帐号', dataIndex: 'account', render: (text, record) => text || `${record.bankName} ${record.cardNo}`},
     { title: '状态', dataIndex: 'status', render: text => statusObj[text] },
   ]), [])
