@@ -1,10 +1,18 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
-import { Descriptions  } from 'antd';
-
+import { Descriptions, Spin } from 'antd';
 import styles from './index.module.css'
-export default () => {
-  useEffect(() => {
+import { apiInfoPost } from '../../service/post'
+import useEven from '../../use/useEven';
 
+export default () => {
+  const [api, setApi] = useState()
+  const [notloading, addLoading, subLoading] = useEven()
+
+  useEffect(() => {
+    addLoading()
+    apiInfoPost()
+      .then(resp => setApi(resp))
+      .then(subLoading)
   }, [])
 
   return (
@@ -12,11 +20,18 @@ export default () => {
       <div className={styles.pageTitle} >
         API管理
       </div>
-      <Descriptions>
-        <Descriptions.Item label="商户ID">668978</Descriptions.Item>
-        <Descriptions.Item label="签名密钥">668978</Descriptions.Item>
-        <Descriptions.Item label="加密密钥">668978</Descriptions.Item>
-      </Descriptions>
+      <Spin spinning={!notloading}>
+        <Descriptions>
+          {
+            api?.status === 0 ?
+              <>
+                <Descriptions.Item label="签名密钥">{api?.apiKey}</Descriptions.Item>
+                <Descriptions.Item label="加密密钥">{api?.secret}</Descriptions.Item>
+              </>: 
+              <Descriptions.Item label="">查无信息, 请联系平台管理员</Descriptions.Item>
+          }
+        </Descriptions>
+      </Spin>
     </div>
   )
 }

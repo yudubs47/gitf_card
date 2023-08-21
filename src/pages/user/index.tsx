@@ -116,7 +116,7 @@ export default () => {
           <Descriptions.Item label="实名认证">
             {
               accountInfo?.realStatus === 0 ? (
-                <Button size='small' type='link' onClick={setShowUserDetailCardFn}>已实名</Button>
+                <Button size='small' type='link'>已实名</Button>
               ):
               (<Link to="/verified">去实名</Link>)
             }
@@ -132,7 +132,7 @@ export default () => {
         </Descriptions>
       </div>
       {
-        showUserDetailCard ? <UserDetailCard onCancel={setShowUserDetailCardFn} /> : null
+        showUserDetailCard ? <UserDetailCard onCancel={setShowUserDetailCardFn} userInfo={accountInfo?.user} /> : null
       }
       {
         showAddUncard ? <AddUncard payType={showAddUncard} onCancel={() => setAddUncard('')} account={showAddUncard === 'ali' ? alipayAccount : wechatAccount} refresh={searchPaymentAccount} /> : ''
@@ -142,12 +142,12 @@ export default () => {
 }
 
 const UserDetailCard = (props: any) => {
-  const { onCancel } = props
+  const { onCancel, userInfo } = props
   // TODO 接口获取
   return (
     <Modal width={350} title='实名信息' open footer={false} onCancel={onCancel}>
       <div className='user-detail-card'>
-        <div className='user-mame'>用户名</div>
+        <div className='user-mame'>{userInfo?.realName}</div>
         <div className='user-detail-card-line'>
           <div className='user-detail-card-label'>证件类型：</div>
           <div className='user-detail-card-value'>-</div>

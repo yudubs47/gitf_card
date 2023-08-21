@@ -16,4 +16,4 @@ export const withdrawCardPost = (params: ReqParams) => get({ url:'/api/v1/withdr
 export const withdrawWechatPost = (params: ReqParams) => get({ url:'/api/v1/withdraw/add/withdraw/wecchat', ...params })
 export const withdrawAlipayPost = (params: ReqParams) => get({ url:'/api/v1/withdraw/add/withdraw/alipay', ...params })
 
-export const withdrawPagePost = (params: ReqParams) => post({ url:'/api/v1/withdraw/add/withdraw/alipay', ...params })
+export const withdrawPagePost = (params: ReqParams) => post({ url:'/api/v1/withdraw/page/withdraw', ...params })

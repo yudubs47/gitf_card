@@ -32,3 +32,5 @@ export const getAbout = () => get({ url:'/api/v1/platform/about' })
 
 // 联系我们
 export const getContact = () => get({ url:'/api/v1/platform/contact' })
+
+export const apiInfoPost = () => post({ url:'/api/v1/api/info' })
