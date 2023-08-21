@@ -103,9 +103,13 @@ export default () => {
     // 提交表单信息
     // console.log('single', value)
     const params = {
-      bankCardId: value.bankCardId,
       money: value.money
     }
+
+    if(payType === 'bank') {
+      params.bankCardId = value.bankCardId
+    }
+
     console.log('params', params);
     (payType === 'ali' ? withdrawAlipayPost: payType === 'wechat' ? withdrawWechatPost: withdrawCardPost)({ params })
       .then(() => {
