@@ -1,7 +1,7 @@
 import { useState, createContext, useMemo, useEffect, useCallback } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider, useLocation } from 'react-router-dom';
 import { getAccountView } from './service/user'
 
 import './App.css'
@@ -97,6 +97,10 @@ function App() {
   const [userInfo, setUserInfo] = useState();
   const [userType, setUserType] = useState('user')
 
+  const location = useLocation()
+
+  const isManagerPage = location.pathname == '/managerLogin' || location.pathname == '/managerSellingRecord' || location.pathname == '/managerWithdrawRecord'
+
   useEffect(() => {
     const userType = window.localStorage.getItem('userType')
     if(userType) {
@@ -110,10 +114,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if(userType === 'user') {
+    if(userType === 'user' && !isManagerPage) {
       getAccountViewFn()
     }
-  }, [userType])
+  }, [userType, isManagerPage])
 
   const mainValue = useMemo(() => {
     return {

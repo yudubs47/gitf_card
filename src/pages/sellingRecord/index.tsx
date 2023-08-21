@@ -23,9 +23,8 @@ const { Title } = Typography
 const statusOptions = [
   { label: '全部', value: undefined },
   { label: '已提交', value: 0 },
-  { label: '处理中', value: 1 },
-  { label: '成功', value: 2 },
-  { label: '失败', value: 3 },
+  { label: '成功', value: 1 },
+  { label: '失败', value: 2 },
 ]
 const statusObj = statusOptions.reduce((pre, cur) => {
   if(cur.value !== undefined) {

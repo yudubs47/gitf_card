@@ -146,6 +146,12 @@ export default () => {
           <Form.Item className={styles.formItem} name="status" label="提卡状态"  >
             <Select options={statusOptions} allowClear placeholder="请选择提卡状态" />
           </Form.Item>
+          <Form.Item className={styles.formItem} name="isApi" label="是否api"  >
+            <Radio.Group >
+              <Radio value={0}>是</Radio>
+              <Radio value={-1}>否</Radio>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item className={styles.formItem}>
             <Button className={styles.marginRight10} type="primary" htmlType="submit">提交</Button>
             <Button type="default" htmlType="reset">重置</Button>
