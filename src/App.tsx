@@ -28,11 +28,17 @@ import Feedback from './pages/feedback';
 import Contact from './pages/contact'
 import Home from './pages/home';
 import SellingRecord from './pages/sellingRecord';
+import ApiSellingRecord from './pages/apiSellingRecord';
 import WithdrawRecord from './pages/withdrawRecord';
 import ManagerLogin from './pages/managerLogin';
 import ManagerSellingRecord from './pages/managerSellingRecord';
 import ManagerWithdrawRecord from './pages/managerWithdrawRecord';
 import ApiManage from './pages/apiManage';
+
+import BillRecord from './pages/billRecord';
+import ManagerBillRecord from './pages/managerBillRecord';
+import DailyRecord from './pages/dailyRecord';
+import ManagerDailyRecord from './pages/managerDailyRecord';
 
 const router = createHashRouter([
   {
@@ -69,10 +75,16 @@ const router = createHashRouter([
       { path: '/register', element: <Register /> },
       { path: '/verified', element: <Verified /> },
       { path: '/sellingRecord', element: <SellingRecord /> },
+      { path: '/apiSellingRecord', element: <ApiSellingRecord /> },
       { path: '/withdrawRecord', element: <WithdrawRecord /> },
       { path: '/managerSellingRecord', element: <ManagerSellingRecord /> },
       { path: '/managerWithdrawRecord', element: <ManagerWithdrawRecord /> },
       { path: '/apiManage', element: <ApiManage /> },
+
+      { path: '/billRecord', element: <BillRecord /> },
+      { path: '/managerBillRecord', element: <ManagerBillRecord /> },
+      { path: '/dailyRecord', element: <DailyRecord /> },
+      { path: '/managerDailyRecord', element: <ManagerDailyRecord /> },
     ]
   },
 ])

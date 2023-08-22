@@ -9,17 +9,6 @@ import { getAllCard } from '../../service/common'
 import { historyPost, historyBatchPost } from '../../service/cards'
 const { Title } = Typography
 
-// "time": "2023-08-12T12:50:58.340Z",
-// "batchId": 0,
-// "cardName": "string",
-// "price": 0,
-// "ratio": 0,
-// "status": 0,
-// "count": 0,
-// "success": 0,
-// "failed": 0,
-// "successMoney": 0
-
 const statusOptions = [
   { label: '全部', value: undefined },
   { label: '已提交', value: 0 },

@@ -11,3 +11,6 @@ export const auditWithdraw = (params?: ReqParams) => get({ url:'/api/v1/admin/wi
 export const historyPost = (params: ReqParams) => post({ url:'/api/v1/admin/card/history', ...params })
 export const historyBatchPost = (params: ReqParams) => post({ url:'/api/v1/admin/card/historyBatch', ...params })
 export const auditHistory = (params?: ReqParams) => get({ url:'/api/v1/admin/card/audit', ...params })
+
+export const reportPage = (params?: ReqParams) => post({ url:'/api/v1/admin/report/page', ...params })
+export const orderReportPage = (params?: ReqParams) => post({ url:'/api/v1/admin/report/order/page', ...params })

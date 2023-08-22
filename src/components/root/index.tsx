@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
-import { UserOutlined, RadarChartOutlined, AccountBookOutlined, TransactionOutlined, BookOutlined, BellOutlined, FundOutlined, StarOutlined } from '@ant-design/icons';
+import { UserOutlined, RadarChartOutlined, AccountBookOutlined, TransactionOutlined, BookOutlined, BellOutlined, FundOutlined, StarOutlined, ApiOutlined, InsertRowAboveOutlined, InsertRowBelowOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme, Avatar, Dropdown, Button } from 'antd';
 import './index.css'
@@ -39,6 +39,21 @@ const menuConfig: MenuProps['items'] = [
     label: '提卡记录',
   },
   {
+    key: 'apiSellingRecord',
+    icon: <FundOutlined />,
+    label: 'API提卡记录',
+  },
+  {
+    key: 'billRecord',
+    icon: <InsertRowAboveOutlined />,
+    label: '账单查询',
+  },
+  {
+    key: 'dailyRecord',
+    icon: <InsertRowBelowOutlined />,
+    label: '日报表查询',
+  },
+  {
     key: 'withdrawRecord',
     icon: <TransactionOutlined />,
     label: '提款记录',
@@ -52,6 +67,11 @@ const menuConfig: MenuProps['items'] = [
     key: 'verified',
     icon: <UserOutlined />,
     label: '实名认证',
+  },
+  {
+    key: 'apiManage',
+    icon: <ApiOutlined />,
+    label: 'api接口',
   },
   {
     key: '__platformPost',
@@ -114,11 +134,6 @@ const menuConfig: MenuProps['items'] = [
         label: '企业回收',
       },
       {
-        key: 'apiManage',
-        icon: <UserOutlined />,
-        label: 'api接口',
-      },
-      {
         key: 'feedback',
         icon: <UserOutlined />,
         label: '意见反馈',
@@ -135,6 +150,14 @@ const menuConfig: MenuProps['items'] = [
 const managerMenuConfig: MenuProps['items'] = [
   { key: 'managerWithdrawRecord', label: '提现记录', },
   { key: 'managerSellingRecord', label: '卖卡记录', },
+  {
+    key: 'managerBillRecord',
+    label: '账单查询',
+  },
+  {
+    key: 'managerDailyRecord',
+    label: '日报表查询',
+  },
 ]
 
 const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {

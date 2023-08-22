@@ -8,6 +8,12 @@ import styles from './index.module.css'
 import { withdrawPagePost, remitWithdraw, auditWithdraw } from '../../service/manager'
 const { Title } = Typography
 
+const withdrawType = {
+  1: '银行卡',
+  2: '微信',
+  3: '支付宝'
+}
+
 const statusOptions = [
   { label: '全部', value: undefined },
   { label: '已成功', value: 1 },
@@ -40,7 +46,7 @@ export default () => {
     { title: '提现金额(元)', dataIndex: 'money' },
     { title: '手续费(元)', dataIndex: 'fee' },
     // { title: '实际到账(元)', dataIndex: 'balance' },
-    { title: '提现类型', dataIndex: 'type' },
+    { title: '提现类型', dataIndex: 'type', render: text => withdrawType[text] },
     { title: '提现帐号', dataIndex: 'account', render: (text, record) => text || `${record.bankName} ${record.cardNo}`},
     { title: '状态', dataIndex: 'status', render: text => statusObj[text] },
 
@@ -110,6 +116,12 @@ export default () => {
         >
           <Form.Item className={styles.formItem} name="times" label="日期筛选"  >
             <DatePicker.RangePicker format="YYYY-MM-DD" locale={locale} />
+          </Form.Item>
+          <Form.Item className={styles.formItem} name="phone" label="手机号"  >
+            <Input  placeholder="请输入手机号" />
+          </Form.Item>
+          <Form.Item className={styles.formItem} name="status" label="提款状态"  >
+            <Select className="inline-select" options={statusOptions} allowClear placeholder="请选择提款状态" />
           </Form.Item>
           <Form.Item className={styles.formItem}>
             <Button className={styles.marginRight10} type="primary" htmlType="submit">提交</Button>

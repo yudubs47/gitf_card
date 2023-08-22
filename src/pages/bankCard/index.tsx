@@ -103,7 +103,10 @@ type AddUncardProps = {
   onCancel: () => void;
 }
 
-const cardNoRules = [{ required: true, message: '请输入银行卡号' }, { pattern: /^\d{16}$/g, message: '银行卡号格式错误' }]
+const cardNoRules = [
+  { required: true, message: '请输入银行卡号' },
+  // { pattern: /^\d{16}$/g, message: '银行卡号格式错误' }
+]
 
 const AddCard = (props: AddUncardProps) => {
   const { onCancel } = props
@@ -122,13 +125,14 @@ const AddCard = (props: AddUncardProps) => {
       })
   }, [])
 
+  // if(!/^\d{16}$/g.test(value)) {
+        //   rej('银行卡号格式错误')
+        // } else 
   const comfirmCardNoRules = useMemo(() => ([
     { 
       validator: (_, value: string) => new Promise((res, rej) => {
         if(value === undefined || value === '') {
           rej('请输入银行卡号')
-        } else if(!/^\d{16}$/g.test(value)) {
-          rej('银行卡号格式错误')
         } else if(value !== cardNo) {
           rej('两次输入卡号需一致')
         } else {
