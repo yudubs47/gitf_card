@@ -180,23 +180,21 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
   const isManager = userType === 'manager'
 
   const logout = () => {
-    console.log('isManager', isManager)
-    if(isManager) {
-      managerLogout()
-        .then(() => {
-          window.localStorage.setItem('yone', '')
-          nav('/managerLogin')
-        })
-    } else {
-      logoutPost()
-        .then(() => {
-          window.localStorage.setItem('token', '')
-          if(refreshUserInfo) {
-            refreshUserInfo()
-          }
-          nav('/login')
-        })
-    }
+    logoutPost()
+      .then(() => {
+        window.localStorage.setItem('token', '')
+        if(refreshUserInfo) {
+          refreshUserInfo()
+        }
+        nav('/login')
+      })
+  }
+  const managerLogoutFn = () => {
+    managerLogout()
+      .then(() => {
+        window.localStorage.setItem('yone', '')
+        nav('/managerLogin')
+      })
   }
 
   const isLoginPage = location.pathname == '/managerLogin' || location.pathname == '/login' || location.pathname == '/register'
@@ -221,9 +219,14 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
         <Dropdown
           menu={{
             items: 
-              userInfo ?
-                [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>推出登录</div> }]:
-                [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav(isManager ? '/managerLogin' : '/login')}>登录</div> }]
+              isManager ?
+                [
+                  { key: '0', label: <div className='main-header-logout-btn' onClick={() => nav('/managerLogin')}>登录</div> },
+                  { key: '1', label: <div className='main-header-logout-btn' onClick={managerLogoutFn}>退出登录</div> }
+                ] :
+                (userInfo ?
+                  [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>退出登录</div> }]:
+                  [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav('/login')}>登录</div> }])
           }} 
           placement="bottomRight"
           arrow={{ pointAtCenter: true }

@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { message } from 'antd'
+import { message, Modal } from 'antd'
+const counter = window.counter as any
+
 const request = axios.create({
   baseURL: 'http://185.106.177.48:9101/',
 })
@@ -32,11 +34,29 @@ export const get = (getParams: GetParams) => {
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
   const reqFn = request.get<any, Resp>(reqUrl, params)
     .then(function (response) {
-      if(response.code === '0') {
+      if(response.code == 0) {
         // message.success(response.message)
         return response.data
       } else {
-        message.error(response.message)
+        if(response.code == -2) {
+          counter.add()
+          if(counter.count === 0) {
+            Modal.info({
+              title: '提示',
+              content: '用户未登录',
+              onOk: () => {
+                window.location.href = '/#/login'
+                counter.subtraction()
+              },
+              onCancel: () => {
+                window.location.href = '/#/login'
+                counter.subtraction()
+              }
+            })
+          }
+        } else {
+          message.error(response.message)
+        }
         throw new Error(response.message)
       }
     })
@@ -52,11 +72,29 @@ export const post = (getParams: GetParams) => {
   const reqUrl = urlParams ? `${url}/${urlParams.join('/')}` : url
   const reqFn = request.post<any, Resp>(reqUrl, params, config)
     .then(function (response) {
-      if(response.code === '0') {
+      if(response.code == 0) {
         // message.success(response.message)
         return response.data
       } else {
-        message.error(response.message)
+        if(response.code == -2) {
+          counter.add()
+          if(counter.count === 0) {
+            Modal.info({
+              title: '提示',
+              content: '用户未登录',
+              onOk: () => {
+                window.location.href = '/#/login'
+                counter.subtraction()
+              },
+              onCancel: () => {
+                window.location.href = '/#/login'
+                counter.subtraction()
+              }
+            })
+          }
+        } else {
+          message.error(response.message)
+        }
         throw new Error(response.message)
       }
     })

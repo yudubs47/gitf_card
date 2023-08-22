@@ -9,6 +9,16 @@
   <body>
     <div id="root"></div>
     <script type="text/javascript" src="https://cn-shanghai-aliyun-cloudauth.oss-cn-shanghai.aliyuncs.com/web_sdk_js/jsvm_all.js" ></script>
+    <script>
+      window.counter = (() => {
+        let count = 0
+        return {
+          count,
+          add: () => count+=1,
+          subtraction: () => count-=1,
+        }
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

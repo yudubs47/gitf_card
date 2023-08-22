@@ -110,6 +110,7 @@ function App() {
   const [userType, setUserType] = useState('user')
 
   const isManagerPage = window.location.hash.indexOf('manager') !== -1
+  const isLoginPage = window.location.hash.indexOf('login') !== -1 || window.location.hash.indexOf('Login') !== -1
 
   useEffect(() => {
     const userType = window.localStorage.getItem('userType')
@@ -124,10 +125,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if(userType === 'user' && !isManagerPage) {
+    console.log('isLoginPage')
+    if(userType === 'user' && !isManagerPage && !isLoginPage) {
       getAccountViewFn()
     }
-  }, [userType, isManagerPage])
+  }, [userType, isManagerPage, isLoginPage])
 
   const mainValue = useMemo(() => {
     return {
