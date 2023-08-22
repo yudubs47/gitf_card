@@ -8,3 +8,46 @@
   font-size: 16px;
   margin-bottom: 24px;
 }
+.outApiBox {
+  margin-top: 20px;
+}
+.apiBox {
+  padding: 0 10px;
+  font-size: 14px;
+}
+.apiBox pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.apiLine {
+  line-height: 32px;
+  display:flex;
+}
+.block {
+  display: block;
+}
+.apiLabel {
+  font-weight: bold;
+}
+.apiValue {
+  padding-left: 10px;
+}
+.titleLine {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.level0, .level1, .level2, .level3 {
+  font-weight: 500;
+  line-height: 16px;
+}
+.level1 {
+  padding-left: 15px;
+}
+.level2 {
+  padding-left: 30px;
+}
+.level3 {
+  padding-left: 45px;
+}

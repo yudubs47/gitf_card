@@ -222,7 +222,7 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
           menu={{
             items: 
               userInfo ?
-                [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>登出</div> }]:
+                [{ key: '0', label: <div className='main-header-logout-btn' onClick={logout}>推出登录</div> }]:
                 [{ key: '0', label: <div className='main-header-logout-btn' onClick={() => nav(isManager ? '/managerLogin' : '/login')}>登录</div> }]
           }} 
           placement="bottomRight"
