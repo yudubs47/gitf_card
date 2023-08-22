@@ -13,10 +13,10 @@ export default () => {
   const [item, setItem] = useState<any>({})
   const nav = useNavigate()
 
-  useEffect(() => {
-    platformNoticePost()
-      .then((resp) => setItem(resp.data[0]))
-  }, [])
+  // useEffect(() => {
+  //   platformNoticePost()
+  //     .then((resp) => setItem(resp.data[0]))
+  // }, [])
 
   return (
     <div className={styles.layout}>
@@ -37,7 +37,7 @@ export default () => {
         </Carousel>
       </div>
       <div className={styles.middle}>
-        <div className={styles.noticeBox} onClick={() => nav('/platformPost')}>
+        {/* <div className={styles.noticeBox} onClick={() => nav('/platformPost')}>
           <div className={styles.noticeMark}>
             公告
           </div>
@@ -54,7 +54,7 @@ export default () => {
           <div className={styles.noticeRightMark}>
             更多公告
           </div>
-        </div>
+        </div> */}
         <div className={styles.explainBox}>
           <Divider className={styles.explainBox} orientation="center" >
             <div className={styles.explain}>使用说明</div>
