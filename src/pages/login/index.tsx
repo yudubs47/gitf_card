@@ -65,18 +65,20 @@ export default () => {
         startCount()
       })
   }, [phoneNumber, imageCode])
+
+  const isLoginWithAccount = loginType === 'account'
   
   return (
     <div className='login-logout'>
       <div className='login-box'>
         <div className='login-type-switch-box'>
-          <div className='login-type-switch' onClick={() => onTypeChange('account')}>账号密码登录</div>
+          <div className={isLoginWithAccount ? 'login-type-switch login-type-acitive' : 'login-type-switch'} onClick={() => onTypeChange('account')}>账号密码登录</div>
           <Divider type="vertical" />
-          <div className='login-type-switch' onClick={() => onTypeChange('phoneNumber')}>手机号验证码登录</div>
+          <div className={isLoginWithAccount ? 'login-type-switch' : 'login-type-switch login-type-acitive'} onClick={() => onTypeChange('phoneNumber')}>手机号验证码登录</div>
         </div>
         <Form size='large' form={form} name="validateOnly" layout="vertical" onFinish={onFinish}>
           {
-            loginType === 'account' ?
+            isLoginWithAccount ?
             <>
               <Form.Item name="name" label="" rules={nameRules}>
                 <Input placeholder='请输入用户名/邮箱/手机号' />
