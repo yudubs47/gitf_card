@@ -25,3 +25,14 @@
 .personalInfoFormBox {
   
 }
+
+.triggerBox {
+  margin-top: 50px;
+}
+.verifiedSuccess {
+  font-size: 14px;
+  margin-top: 50px;
+}
+.verifiedSuccess span {
+  color: #00B96B;
+}

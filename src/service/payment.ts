@@ -8,7 +8,7 @@ export const updateAlipay = (params: ReqParams) => get({ url:'/api/v1/auth/save/
 export const getBankCardList = () => get({ url:'/api/v1/auth/bankCardList' })
 export const getBankList = () => get({ url:'/api/v1/auth/bankList' })
 
-export const addBankCardPersonalPost = (params: ReqParams) => get({ url:'/api/v1/auth/addBankCardPersonal', ...params })
+export const addBankCardPersonalPost = (params: ReqParams) => post({ url:'/api/v1/auth/addBankCardPersonal', ...params })
 
 export const getBalance = () => get({ url:'/api/v1/withdraw/balance' })
 

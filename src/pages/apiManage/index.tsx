@@ -58,6 +58,15 @@ export default () => {
     }
   }, [groupId])
 
+  useEffect(() => {
+    if(infoId !== undefined) {
+      const selectedInfo = cardInfoList.find((item: any) => item.id === +infoId) as any
+      setCardSkuList(selectedInfo.skus.map((item: any) => ({ ...item, rate: Math.floor(item.realPrice/item.basePrice*100) })))
+    } else {
+      setCardSkuList([])
+    }
+  }, [infoId, cardInfoList])
+
   return (
     <div className={styles.layout} >
       <div className={styles.pageTitle} >
@@ -96,7 +105,7 @@ export default () => {
           </Radio.Group>
         </div>
         <Table
-          title={() => `通道代码: ${infoId}`}
+          // title={() => `通道代码: ${infoId}`}
           columns={columns}
           dataSource={cardSkuList}
           pagination={false}
@@ -105,7 +114,7 @@ export default () => {
           <div className={styles.apiBox}>
             <div className={styles.apiLine}>
               <div className={styles.apiLabel}>url:</div>
-              <div className={styles.apiValue}>/api/v1/card/add/carmis</div>
+              <div className={styles.apiValue}>/api/v1/api/submit</div>
             </div>
             <div className={styles.apiLine}>
               <div className={styles.apiLabel}>method:</div>
@@ -127,7 +136,7 @@ export default () => {
           <div className={styles.apiBox}>
             <div className={styles.apiLine}>
               <div className={styles.apiLabel}>url:</div>
-              <div className={styles.apiValue}>/api/v1/card/add/batchcarmis</div>
+              <div className={styles.apiValue}>/api/v1/api/batchSubmit </div>
             </div>
             <div className={styles.apiLine}>
               <div className={styles.apiLabel}>method:</div>

@@ -8,33 +8,6 @@ import styles from './index.module.css'
 import { reportPage } from '../../service/report'
 const { Title } = Typography
 
-const transFn = (list: {label: string; value: string | number | undefined }[]) => {
-  return list.reduce((pre, cur) => {
-    if(cur.value !== undefined) {
-      pre[cur.value] = cur.label
-    }
-    return pre
-  }, {} as any)
-}
-
-const orderTypeOptions = [
-  { label: '全部', value: undefined },
-  { label: '提款', value: 1 },
-  { label: '退换提款', value: 2 },
-  { label: '收卡', value: 3 },
-]
-
-const orderStatusOptions = [
-  { label: '全部', value: undefined },
-  { label: '正常', value: 0 },
-  { label: '超时', value: 1 },
-  { label: '退款', value: 2 },
-  { label: '成功', value: 3 },
-]
-
-const orderTypeObj = transFn(orderTypeOptions)
-const orderStatusObj = transFn(orderStatusOptions)
-
 const today = dayjs().startOf('day')
 const initTimes = [today.subtract(7, 'day'), today.add(1, 'day')]
 const initData = { times: initTimes }

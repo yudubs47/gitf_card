@@ -10,13 +10,13 @@ import { historyPost, historyBatchPost } from '../../service/cards'
 const { Title } = Typography
 
 const statusOptions = [
-  { label: '全部', value: undefined },
+  { label: '全部', value: null },
   { label: '已提交', value: 0 },
   { label: '成功', value: 1 },
   { label: '失败', value: 2 },
 ]
 const statusObj = statusOptions.reduce((pre, cur) => {
-  if(cur.value !== undefined) {
+  if(cur.value !== null) {
     pre[cur.value] = cur.label
   }
   return pre
@@ -75,6 +75,9 @@ export default () => {
       ...params,
       start: params.start ? params.start.valueOf() : undefined,
       end: params.end ? params.end.valueOf() : undefined
+    }
+    if(nextParams.status === null) {
+      delete nextParams.status
     }
     addLoading()
     historyPost({ params: nextParams })

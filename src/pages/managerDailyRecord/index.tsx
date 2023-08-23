@@ -8,9 +8,9 @@ import styles from './index.module.css'
 import { orderReportPage } from '../../service/manager'
 const { Title } = Typography
 
-const transFn = (list: {label: string; value: string | number | undefined }[]) => {
+const transFn = (list: {label: string; value: string | number | null }[]) => {
   return list.reduce((pre, cur) => {
-    if(cur.value !== undefined) {
+    if(cur.value !== null) {
       pre[cur.value] = cur.label
     }
     return pre
@@ -18,14 +18,14 @@ const transFn = (list: {label: string; value: string | number | undefined }[]) =
 }
 
 const orderTypeOptions = [
-  { label: '全部', value: undefined },
+  { label: '全部', value: null },
   { label: '提款', value: 1 },
   { label: '退换提款', value: 2 },
   { label: '收卡', value: 3 },
 ]
 
 const orderStatusOptions = [
-  { label: '全部', value: undefined },
+  { label: '全部', value: null },
   { label: '正常', value: 0 },
   { label: '超时', value: 1 },
   { label: '退款', value: 2 },

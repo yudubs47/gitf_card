@@ -9,13 +9,13 @@ import { withdrawPagePost } from '../../service/payment'
 const { Title } = Typography
 
 const statusOptions = [
-  { label: '全部', value: undefined },
+  { label: '全部', value: null },
   { label: '成功', value: 1 },
   { label: '拒绝', value: 2 },
   { label: '处理中', value: 3 },
 ]
 const statusObj = statusOptions.reduce((pre, cur) => {
-  if(cur.value !== undefined) {
+  if(cur.value !== null) {
     pre[cur.value] = cur.label
   }
   return pre
@@ -53,6 +53,9 @@ export default () => {
       ...params,
       start: params.start ? params.start.valueOf() : undefined,
       end: params.end ? params.end.valueOf() : undefined
+    }
+    if(nextParams.status === null) {
+      delete nextParams.status
     }
     console.log('withdrawPagePost', nextParams)
     addLoading()
