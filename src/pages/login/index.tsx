@@ -114,10 +114,6 @@ export default () => {
           <Link to="/register">
             <Button type='link'>立即注册</Button>
           </Link>
-          <Divider type="vertical" />
-          <Link to="/managerLogin">
-            <Button type='link'>管理员登录</Button>
-          </Link>
         </div>
       </div>
     </div>
