@@ -94,7 +94,7 @@ export default () => {
     <div className={styles.layout} >
     <Spin spinning={!notloading}>
       <div className={styles.pageTitle}>
-        日报表
+      账单查询
       </div>
       <div className={styles.formBox}>
         <Form

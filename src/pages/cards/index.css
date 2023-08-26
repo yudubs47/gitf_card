@@ -43,6 +43,9 @@
 .cards-radio-group-box {
   padding: 0 15px;
 }
+.cards-thir-radio-card {
+  width: 100px;
+}
 .cards-thir-radio-card .cards-radio-card-value {
   text-align: center;
   font-size: 16px;

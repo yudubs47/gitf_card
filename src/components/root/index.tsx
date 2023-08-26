@@ -46,12 +46,12 @@ const menuConfig: MenuProps['items'] = [
   {
     key: 'billRecord',
     icon: <InsertRowAboveOutlined />,
-    label: '账单查询',
+    label: '日报表查询',
   },
   {
     key: 'dailyRecord',
     icon: <InsertRowBelowOutlined />,
-    label: '日报表查询',
+    label: '账单查询',
   },
   {
     key: 'withdrawRecord',
@@ -152,11 +152,11 @@ const managerMenuConfig: MenuProps['items'] = [
   { key: 'managerSellingRecord', label: '卖卡记录', },
   {
     key: 'managerBillRecord',
-    label: '账单查询',
+    label: '日报表查询',
   },
   {
     key: 'managerDailyRecord',
-    label: '日报表查询',
+    label: '账单查询',
   },
 ]
 
@@ -202,7 +202,10 @@ const Index: React.FC<{ showSiderBar?: boolean }> = (props) => {
   return (
     <Layout className='main-layout'>
       <Header className='main-header' style={headerStyle}>
-        {isManager ? <Avatar icon={<RadarChartOutlined />} /> : <Link to='/'><Avatar icon={<RadarChartOutlined />} /></Link>}
+        <span className="main-header-icon">
+          {isManager ? '海梦寄售' : <Link to='/'>海梦寄售</Link>}
+        </span>
+        
         {
           !isLoginPage ?
             (isManager ?

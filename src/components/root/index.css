@@ -46,3 +46,9 @@
 .main-header-link-active {
   border-bottom: 2px solid #00B96B;
 }
+
+.main-header-icon, .main-header-icon a, .main-header-icon a:active {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.88);
+}
