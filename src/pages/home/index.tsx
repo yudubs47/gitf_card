@@ -22,10 +22,8 @@ export default () => {
     <div className={styles.layout}>
       <div className={styles.carouselBox}>
         <Carousel autoplay>
-          <div className={styles.carouselImgBox}>
-            <span>第一张</span>
-          </div>
-          <div className={styles.carouselImgBox}>
+          <img src="https://web-resource.70ka.com/resource/images/cooperation/banner.jpg" alt="" />
+          {/* <div className={styles.carouselImgBox}>
             <span>第二张</span>
           </div>
           <div className={styles.carouselImgBox}>
@@ -33,7 +31,7 @@ export default () => {
           </div>
           <div className={styles.carouselImgBox}>
             <span>第四张</span>
-          </div>
+          </div> */}
         </Carousel>
       </div>
       <div className={styles.middle}>
