@@ -14,3 +14,5 @@ export const auditHistory = (params?: ReqParams) => get({ url:'/api/v1/admin/car
 
 export const reportPage = (params?: ReqParams) => post({ url:'/api/v1/admin/report/page', ...params })
 export const orderReportPage = (params?: ReqParams) => post({ url:'/api/v1/admin/report/order/page', ...params })
+
+export const auditCarmisHistory = (params?: ReqParams) => get({ url:'/api/v1/admin/card/auditCarmis', ...params })

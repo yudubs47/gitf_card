@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import useEven from '../../use/useEven';
 import styles from './index.module.css'
 import { getAllCard } from '../../service/common'
-import { historyPost, historyBatchPost, auditHistory } from '../../service/manager'
+import { historyPost, historyBatchPost, auditHistory, auditCarmisHistory } from '../../service/manager'
 const { Title } = Typography
 
 const statusOptions = [
@@ -25,15 +25,6 @@ const statusObj = statusOptions.reduce((pre, cur) => {
 const today = dayjs().startOf('day')
 const initTimes = [today.subtract(7, 'day'), today.add(1, 'day')]
 const initData = { times: initTimes }
-const detailColums = [
-  { title: '卡种', dataIndex: 'cardName' },
-  { title: '卡号', dataIndex: 'cardNo' },
-  { title: '卡名', dataIndex: 'password' },
-  { title: '面值', dataIndex: 'price' },
-  { title: '比率', dataIndex: 'ratio', render: text => `${text * 100}%` },
-  { title: '预计可得', dataIndex: 'realPrice' },
-  { title: '状态', dataIndex: 'status', render: text => statusObj[text] },
-]
 
 export default () => {
   const [cardList, setCardList] = useState([])
@@ -44,6 +35,7 @@ export default () => {
   const [detail, setDetail] = useState([])
   const [notloading, addLoading, subLoading] = useEven()
   const [batchId, setBatchId] = useState()
+  const [carmisId, setCarmisId] = useState()
 
   const columns = useMemo(() => ([
     { title: '批次id', dataIndex: 'batchId' },
@@ -65,12 +57,26 @@ export default () => {
               item.status === 0 ?
               <Button type="link" size="small" onClick={() => setBatchId(item.batchId)} >审核</Button> : ''
             }
-            
           </>
         )
       } 
     },
   ]), [])
+
+  const detailColums = useMemo(() => ([
+    { title: '卡种', dataIndex: 'cardName' },
+    { title: '卡号', dataIndex: 'cardNo' },
+    { title: '卡名', dataIndex: 'password' },
+    { title: '面值', dataIndex: 'price' },
+    { title: '比率', dataIndex: 'ratio', render: text => `${text * 100}%` },
+    { title: '预计可得', dataIndex: 'realPrice' },
+    { title: '状态', dataIndex: 'status', render: text => statusObj[text] },
+    {
+      title: '操作',
+      dataIndex: 'opt',
+      render: (text, item) => item.status === 0 ? <Button type="link" size="small" onClick={() => setCarmisId(item.id)}>审核</Button> : '-'
+    }
+  ]), []) 
   
   useEffect(() => {
     getAllCard()
@@ -197,12 +203,15 @@ export default () => {
         />
       </Modal>
       {
-        batchId !== undefined ?
+        (batchId !== undefined || carmisId !== undefined) ?
           <AuditModal
             batchId={batchId}
+            carmisId={carmisId}
             onCancel={() => {
               searchFn(searchParams)
               setBatchId(undefined)
+              setCarmisId(undefined)
+              setDetailId(undefined)
             }}
           /> : undefined
       }
@@ -217,14 +226,14 @@ export default () => {
 // }
 
 const AuditModal = (props) => {
-  const { batchId, onCancel } = props
+  const { batchId, onCancel, carmisId } = props
   const [form] = Form.useForm();
   const [notloading, addLoading, subLoading] = useEven()
 
   const onFinish = useCallback((value: any) => {
     const { status } = value
-    addLoading()
-    auditHistory({ urlParams: [batchId, status] })
+    addLoading();
+    (carmisId !== undefined ? auditCarmisHistory({ urlParams: [carmisId, status] }) : auditHistory({ urlParams: [batchId, status] }))
       .then(() => {
         message.success('审核状态已更新')
         onCancel()
