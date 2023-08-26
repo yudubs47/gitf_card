@@ -7,6 +7,47 @@ import useEven from '../../use/useEven';
 import { carmishPost, batchcarmisPost, getViewCard } from '../../service/cards'
 import './index.css'
 
+const imgSrc = {
+  1: '/cardIcon/lian_tong_man.png', 
+  2: '/cardIcon/yi_dong.png',
+  3: '/cardIcon/dian_xin.png',
+  4: '/cardIcon/lian_tong_kuai.gif',
+  5: '/cardIcon/lian_tong_kuai.gif',
+  6: '/cardIcon/yi_dong.png',
+  7: '/cardIcon/dian_xin.png',
+  8: '/cardIcon/yi_dong.png',
+  9: '/cardIcon/dian_xin.png',
+
+  10: '/cardIcon/wan_mei.png',
+  11: '/cardIcon/wang_yi.png',
+  12: '/cardIcon/ping_guo.png',
+  13: '/cardIcon/tian_hong.png',
+  14: '/cardIcon/tian_hong.png',
+  15: '/cardIcon/tian_hong.png',
+  16: '/cardIcon/zheng_tu.png',
+  17: '/cardIcon/q_bi.png',
+  18: '/cardIcon/sou_hu.png',
+  19: '/cardIcon/zi_you.png',
+  20: '/cardIcon/jin_shan.png',
+  21: '/cardIcon/hui_yuan.png',
+  22: '/cardIcon/wang_yi.png',
+  23: '/cardIcon/tian_hong.png',
+  24: '/cardIcon/tian_hong.png',
+  25: '/cardIcon/q_bi.png',
+  26: '/cardIcon/yun_you.png',
+  27: '/cardIcon/yi_chong.png',
+  28: '/cardIcon/tong_dui.png',
+  29: '/cardIcon/tian_hong.png',
+  30: '/cardIcon/ling_long.png',
+  31: '/cardIcon/hua_wang.png',
+
+  32: '/cardIcon/zhong_shi_hua.png',
+  33: '/cardIcon/zhong_shi_hua.png',
+  34: '/cardIcon/zhong_shi_hua.png',
+  35: '/cardIcon/zhong_shi_you.png',
+
+}
+
 const trim = (str?: string) => (str || '').trim()
 
 const formatMult = (str: string) => {
@@ -244,7 +285,7 @@ const RadioSecCard = (props: RadioSecCardProps) => {
   return (
     <div className={`cards-radio-card cards-sec-radio-card ${className || ''}`}>
       <div className='cards-radio-card-icon'>
-        {icon ? icon : <img height={30} src={url} />}
+        {url ? <img className="card-icon-img" height={30} src={url} /> : icon}
       </div>
       <div className='cards-radio-card-name'>
         {name}
@@ -358,7 +399,7 @@ export default () => {
           {
             cardInfoList.map((item: any, index) => (
               <Radio.Button key={item.id} value={item.id}>
-                <RadioSecCard icon={icons[index] || icons[0]} name={item.name} />
+                <RadioSecCard url={imgSrc[item.id]} icon={icons[index] || icons[0]} name={item.name} />
               </Radio.Button>
             ))
           }

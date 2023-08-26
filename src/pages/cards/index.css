@@ -63,3 +63,6 @@
 .cards-hide {
   display: none;
 }
+.card-icon-img {
+  margin-bottom: 5px;
+}
